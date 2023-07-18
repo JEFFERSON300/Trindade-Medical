@@ -1,3 +1,4 @@
+import { LoginPage } from "./pages/Login/Login.page"
 
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
 
   return (
     <div>
-      <p>App is render</p>
+      <LoginPage/>
     </div>
   )
 }

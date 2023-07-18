@@ -1,7 +1,9 @@
-export const HomePage = () => {
+import { FormLoginComponent } from "../../components/Form/Login/Login.component"
+
+export const LoginPage = () => {
     return(
         <>
-        <p>HomePage is Render</p>
+        <FormLoginComponent/>
         </>
     )
 }

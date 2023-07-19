@@ -1,9 +1,16 @@
 {
   "": [
-    { "id": 1, "email": "jefferson-server", "password": "typicode" }
+    {
+      "id": 4,
+      "email": "jeffersonpedro300@gmail.com",
+      "password": "12345678"
+    }
   ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
+  "home": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ]
 }

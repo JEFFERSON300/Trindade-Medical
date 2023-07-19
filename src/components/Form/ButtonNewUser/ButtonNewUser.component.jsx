@@ -33,7 +33,7 @@ function ButtonNewUserComponent() {
           body: JSON.stringify({id, email, password})
         }).then(() => {
           console.log('Post submitted successfully');
-        
+          // tratar problema do erro do id duplicado
       })
         setID(id+1);
         handleClose();

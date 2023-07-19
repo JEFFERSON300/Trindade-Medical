@@ -1,4 +1,3 @@
-import { object } from "prop-types";
 import ButtonNewUserComponent from "../ButtonNewUser/ButtonNewUser.component";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -39,9 +38,6 @@ export const FormLoginComponent = () => {
     };
 
     const isValid = users.filter(user => {return user.email === dataInput.email && user.password === dataInput.password});
-    
-    console.log(isValid.constructor === Object);
-    console.log(Object.values(isValid).length===0);
 
     if (Object.values(isValid).length === 0) {
       navigate("/");

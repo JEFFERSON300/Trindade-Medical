@@ -1,20 +1,19 @@
-import { object } from "prop-types";
 import ButtonNewUserComponent from "../ButtonNewUser/ButtonNewUser.component";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import * as Styled from "./Login.style";
 
 export const FormLoginComponent = () => {
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
   const emailInputElement = useRef();
   const passwordInputElement = useRef();
-  
+  const [users, setUsers] = useState([]);
+
   const handleClick = (e) => {
     e.preventDefault();
     window.alert("Funcionalidade em construção...");
-  }
-
-  const [users, setUsers] = useState([]);
+  };
 
   const fetchUserData = () => {
     fetch("http://localhost:8000/")
@@ -38,41 +37,64 @@ export const FormLoginComponent = () => {
       password: passwordInputElement.current?.value,
     };
 
-    const isValid = users.filter(user => {return user.email === dataInput.email && user.password === dataInput.password});
-    
-    console.log(isValid.constructor === Object);
-    console.log(Object.values(isValid).length===0);
+    const isValid = users.filter((user) => {
+      return (
+        user.email === dataInput.email && user.password === dataInput.password
+      );
+    });
 
     if (Object.values(isValid).length === 0) {
       navigate("/");
-    }
-    else {
+    } else {
       navigate("/home");
     }
-    
-
   };
 
   return (
     <div>
-    
-      <form onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label htmlFor="email">E-mail</label>
-          <input ref={emailInputElement} type="email" id="email" placeholder="Digite seu email" />
-        </div>
+      <Styled.Action>
+        <Styled.ActionTitle>Não possui uma conta?</Styled.ActionTitle>
+        <ButtonNewUserComponent />
+      </Styled.Action>
 
-        <div className="input-group">
-          <label htmlFor="senha">Senha</label>
-          <input ref={passwordInputElement} type="password" id="password" placeholder="Digite sua senha" />
-        </div>
-        <button type="submit">Logar</button>
-      </form>
+      <Styled.Form onSubmit={handleSubmit}>
+        <Styled.Header>
+          <Styled.Title>Login</Styled.Title>
+          <Styled.Subtitle>
+            Para acessar o sistema digite seu email e sua senha
+          </Styled.Subtitle>
+        </Styled.Header>
 
-      <ButtonNewUserComponent />
-      
-      <a href="#" onClick={handleClick}>Esqueceu a senha</a>
+        <Styled.InputGroup>
+          <Styled.InputElement>
+            <label htmlFor="email">E-mail</label>
+            <Styled.Control
+              ref={emailInputElement}
+              type="email"
+              id="email"
+              placeholder="Digite seu e-mail"
+            />
+          </Styled.InputElement>
 
+          <Styled.InputElement>
+            <label htmlFor="senha">Senha</label>
+            <Styled.Control
+              ref={passwordInputElement}
+              type="password"
+              id="password"
+              placeholder="Digite sua senha"
+            />
+          </Styled.InputElement>
+        </Styled.InputGroup>
+
+        <Button variant="primary" type="submit">
+          Entrar
+        </Button>
+
+        <Styled.EsqueciSenha href="#" onClick={handleClick}>
+          Esqueceu sua senha?
+        </Styled.EsqueciSenha>
+      </Styled.Form>
     </div>
   );
 };

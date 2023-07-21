@@ -60,9 +60,6 @@ export const FormLoginComponent = () => {
       <Styled.Form onSubmit={handleSubmit}>
         <Styled.Header>
           <Styled.Title>Login</Styled.Title>
-          <Styled.Subtitle>
-            Para acessar o sistema digite seu email e sua senha
-          </Styled.Subtitle>
         </Styled.Header>
 
         <Styled.InputGroup>
@@ -87,7 +84,7 @@ export const FormLoginComponent = () => {
           </Styled.InputElement>
         </Styled.InputGroup>
 
-        <Button variant="primary" type="submit">
+        <Button style={{ width: "500px" }} variant="primary" type="submit">
           Entrar
         </Button>
 

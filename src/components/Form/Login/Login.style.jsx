@@ -1,22 +1,30 @@
 import styled from "styled-components";
 
-export const Section = styled.div``;
-
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
   align-items: center;
-  margin: 25vh 0;
+  margin: 20vh 0;
 `;
 export const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-  position: relative;
+  text-align: start;
 `;
-export const InputGroup = styled.div``;
+
+export const Title = styled.legend`
+  color: #0d6efd;
+  font-family: Segoe UI;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  min-width: 500px;
+`;
+
+export const InputGroup = styled.div`
+  margin-bottom: 50px;
+  margin-top: 30px;
+`;
 
 export const Action = styled.div`
   display: flex;
@@ -34,28 +42,18 @@ export const ActionTitle = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  vertical-align: bottom;
 `;
 
 export const InputElement = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-export const Title = styled.legend`
-  color: #5281dc;
-  font-family: Segoe UI;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  text-align: start;
+  margin: 20px 0 10px 0;
 `;
 
 export const Subtitle = styled.p`
   color: rgba(105, 105, 105, 0.93);
   font-family: Segoe UI;
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -64,6 +62,7 @@ export const Subtitle = styled.p`
 
 export const EsqueciSenha = styled.a`
   text-decoration: none;
+  margin-top: 20px;
 `;
 
 export const Control = styled.input`

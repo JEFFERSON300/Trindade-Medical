@@ -41,7 +41,11 @@ function ButtonNewUserComponent() {
 
   return (
     <div>
-      <Button variant="outline-primary" onClick={handleShow}>
+      <Button
+        style={{ width: "150px" }}
+        variant="outline-primary"
+        onClick={handleShow}
+      >
         Criar Conta
       </Button>
 

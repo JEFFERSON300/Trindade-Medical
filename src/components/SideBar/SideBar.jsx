@@ -8,8 +8,8 @@ import {
 
 function Side() {
   return (
-    <div style={{ display: "flex", height: "100vh", margin: "10px 0" }}>
-      <Sidebar className="sidebar">
+    <div style={{ display: "flex", height: "100vh", color: "white" }}>
+      <Sidebar backgroundColor="#0D6EFD" className="sidebar">
         <Menu>
           <MenuItem disabled={true}>
             <h4>Trindade Medical</h4>

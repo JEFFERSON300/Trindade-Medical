@@ -1,7 +1,8 @@
 import ButtonNewUserComponent from "../ButtonNewUser/ButtonNewUser.component";
-import Button from "react-bootstrap/Button";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import * as Styled from "./Login.style";
 
 export const FormLoginComponent = () => {
   const navigate = useNavigate();
@@ -51,40 +52,49 @@ export const FormLoginComponent = () => {
 
   return (
     <div>
-      <div className="section">
-        <p>Não possui uma conta?</p>
+      <Styled.Action>
+        <Styled.ActionTitle>Não possui uma conta?</Styled.ActionTitle>
         <ButtonNewUserComponent />
-      </div>
+      </Styled.Action>
 
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label htmlFor="email">E-Mail</label>
-          <input
-            ref={emailInputElement}
-            type="email"
-            id="email"
-            placeholder="Digite seu email"
-          />
-        </div>
+      <Styled.Form onSubmit={handleSubmit}>
+        <Styled.Header>
+          <Styled.Title>Login</Styled.Title>
+          <Styled.Subtitle>
+            Para acessar o sistema digite seu email e sua senha
+          </Styled.Subtitle>
+        </Styled.Header>
 
-        <div className="input-group">
-          <label htmlFor="senha">Senha</label>
-          <input
-            ref={passwordInputElement}
-            type="password"
-            id="password"
-            placeholder="Digite sua senha"
-          />
-        </div>
+        <Styled.InputGroup>
+          <Styled.InputElement>
+            <label htmlFor="email">E-mail</label>
+            <Styled.Control
+              ref={emailInputElement}
+              type="email"
+              id="email"
+              placeholder="Digite seu e-mail"
+            />
+          </Styled.InputElement>
+
+          <Styled.InputElement>
+            <label htmlFor="senha">Senha</label>
+            <Styled.Control
+              ref={passwordInputElement}
+              type="password"
+              id="password"
+              placeholder="Digite sua senha"
+            />
+          </Styled.InputElement>
+        </Styled.InputGroup>
+
         <Button variant="primary" type="submit">
           Entrar
         </Button>
-      </form>
 
-      <a href="#" onClick={handleClick}>
-        Esqueceu sua senha?
-      </a>
+        <Styled.EsqueciSenha href="#" onClick={handleClick}>
+          Esqueceu sua senha?
+        </Styled.EsqueciSenha>
+      </Styled.Form>
     </div>
   );
 };

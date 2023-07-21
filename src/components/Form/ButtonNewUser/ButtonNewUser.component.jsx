@@ -41,7 +41,7 @@ function ButtonNewUserComponent() {
 
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="outline-primary" onClick={handleShow}>
         Criar Conta
       </Button>
 

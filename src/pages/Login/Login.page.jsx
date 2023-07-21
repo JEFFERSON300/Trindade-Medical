@@ -1,11 +1,16 @@
-import { FormLoginComponent } from "../../components/Form/Login/Login.component"
+import { FormLoginComponent } from "../../components/Form/Login/Login.component";
+import * as Styled from "./Login.style";
 
 export const LoginPage = () => {
+  return (
+    <Styled.Login>
+      <Styled.LoginLeft>
+        <Styled.Img src="/login.jpg" alt="" width="500" />
+      </Styled.LoginLeft>
 
-    return(
-        <div>
-            <FormLoginComponent/>
-            
-        </div>
-    )
-}
+      <Styled.LoginRigth>
+        <FormLoginComponent />
+      </Styled.LoginRigth>
+    </Styled.Login>
+  );
+};

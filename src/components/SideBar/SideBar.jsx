@@ -9,7 +9,7 @@ import {
   AiOutlineUnorderedList,
 } from "react-icons/ai";
 
-function Side() {
+function SideBarComponent() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -17,15 +17,15 @@ function Side() {
       style={{
         display: "flex",
         height: "100vh",
-
         minHeight: "400px",
       }}
     >
       <Sidebar
         className="sidebar"
         collapsed={collapsed}
-        width={"275px"}
+        width={"245px"}
         collapsedWidth={"80px"}
+        backgroundColor="#F8F9FA"
       >
         <Menu>
           <MenuItem
@@ -90,4 +90,4 @@ function Side() {
   );
 }
 
-export default Side;
+export default SideBarComponent;

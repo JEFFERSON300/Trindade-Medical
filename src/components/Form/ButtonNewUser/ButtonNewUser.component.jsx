@@ -5,7 +5,6 @@ import Modal from "react-bootstrap/Modal";
 
 function ButtonNewUserComponent() {
   const [show, setShow] = useState(false);
-  const [id, setID] = useState(1);
 
   const emailInputElement = useRef();
   const password1InputElement = useRef();
@@ -27,12 +26,11 @@ function ButtonNewUserComponent() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id, email, password }),
+        body: JSON.stringify({ email, password }),
       }).then(() => {
         console.log("Post submitted successfully");
         // tratar problema do erro do id duplicado
       });
-      setID(id + 1);
       handleClose();
     } else {
       setShow(true);

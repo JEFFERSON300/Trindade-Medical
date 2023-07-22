@@ -3,9 +3,11 @@ import NavbarComponent from "../../components/Toolbar/Navbar/Navbar.component";
 
 export const HomePage = () => {
   return (
-    <>
-      <NavbarComponent name="Home" />
-      <SideBarComponent />
-    </>
+    <div style={{ display: "flex" }}>
+      <SideBarComponent style={{}} />
+      <main style={{ flex: "1" }}>
+        <NavbarComponent style={{}} name="Home" />
+      </main>
+    </div>
   );
 };

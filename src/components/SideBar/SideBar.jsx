@@ -23,13 +23,13 @@ function SideBarComponent() {
       <Sidebar
         className="sidebar"
         collapsed={collapsed}
-        width={"245px"}
+        width={"250px"}
         collapsedWidth={"80px"}
         backgroundColor="#F8F9FA"
       >
         <Menu>
           <MenuItem
-            style={{ color: "gray" }}
+            style={{ color: "gray", marginTop: "15px" }}
             icon={<AiOutlineUnorderedList />}
             disabled={true}
           >

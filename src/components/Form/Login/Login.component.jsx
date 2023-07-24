@@ -1,14 +1,28 @@
 import ButtonNewUserComponent from "../ButtonNewUser/ButtonNewUser.component";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import * as Styled from "./Login.style";
+import { InputComponent } from "../Input/Input.component";
 
 export const FormLoginComponent = () => {
   const navigate = useNavigate();
-  const emailInputElement = useRef();
-  const passwordInputElement = useRef();
-  const [users, setUsers] = useState([]);
+
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [users, setUsers] = useState({});
+
+  const isDisable = () => {
+    return (
+      !data.email ||
+      !data.password ||
+      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(data.email) ||
+      data.password < 8
+    );
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -20,27 +34,25 @@ export const FormLoginComponent = () => {
       .then((response) => {
         return response.json();
       })
-      .then((data) => {
-        setUsers(data);
+      .then((users) => {
+        setUsers(users);
       });
+    console.log(users);
   };
 
   useEffect(() => {
     fetchUserData();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleInput = (e) => {
     e.preventDefault();
+    const { value, id } = e.target;
+    setData({ ...data, [id]: value });
 
-    const dataInput = {
-      email: emailInputElement.current?.value,
-      password: passwordInputElement.current?.value,
-    };
-
+    {
+      /*
     const isValid = users.filter((user) => {
-      return (
-        user.email === dataInput.email && user.password === dataInput.password
-      );
+      return user.email === data.email && user.password === data.password;
     });
 
     if (Object.values(isValid).length === 0) {
@@ -48,6 +60,12 @@ export const FormLoginComponent = () => {
     } else {
       navigate("/home");
     }
+  */
+    }
+  };
+
+  const redirectToHome = () => {
+    navigate("/home");
   };
 
   return (
@@ -57,34 +75,35 @@ export const FormLoginComponent = () => {
         <ButtonNewUserComponent />
       </Styled.Action>
 
-      <Styled.Form onSubmit={handleSubmit}>
+      <Styled.Form onSubmit={redirectToHome}>
         <Styled.Header>
           <Styled.Title>Login</Styled.Title>
         </Styled.Header>
 
         <Styled.InputGroup>
           <Styled.InputElement>
-            <label htmlFor="email">E-mail</label>
-            <Styled.Control
-              ref={emailInputElement}
-              type="email"
+            <InputComponent
               id="email"
+              type="email"
               placeholder="Digite seu e-mail"
+              label="E-mail"
             />
-          </Styled.InputElement>
-
-          <Styled.InputElement>
-            <label htmlFor="senha">Senha</label>
-            <Styled.Control
-              ref={passwordInputElement}
-              type="password"
+            
+            <InputComponent
               id="password"
+              type="password"
               placeholder="Digite sua senha"
+              label="Senha"
             />
           </Styled.InputElement>
         </Styled.InputGroup>
 
-        <Button style={{ width: "500px" }} variant="primary" type="submit">
+        <Button
+          style={{ width: "500px" }}
+          variant="primary"
+          type="submit"
+          disabled={isDisable()}
+        >
           Entrar
         </Button>
 

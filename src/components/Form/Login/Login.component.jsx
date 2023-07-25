@@ -1,16 +1,15 @@
 import ButtonNewUserComponent from "../ButtonNewUser/ButtonNewUser.component";
-import { useEffect, useState, useContext  } from "react";
+import { useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import * as Styled from "./Login.style";
 import { InputComponent } from "../Input/Input.component";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../contexts/auth/auth.context";
+import { UserService } from "../../../services/User/User.service";
 
 export const FormLoginComponent = () => {
-  const navigate = useNavigate();
-  
-  const [users, setUsers] = useState({});
+  const navigate = useNavigate();  
 
   const { setAuth } = useContext(AuthContext);
 
@@ -30,25 +29,13 @@ export const FormLoginComponent = () => {
     formState: { errors },
   } = useForm();
 
-  const fetchUserData = () => {
-    fetch("http://localhost:8000/")
-      .then((response) => {
-        return response.json();
-      })
-      .then((users) => {
-        setUsers(users);
-      });
-    console.log(users);
-  };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+  
 
   const submitForm = (data) => {
     const { email, password } = data;
 
-    const user = users.find((u) => u.email === email);
+    // const user = users.find((u) => u.email === email);
+    const user = UserService.ShowByEmail(email);
 
     if (!user) {
       alert("Usuário não cadastrado");

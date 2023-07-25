@@ -7,8 +7,9 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/home" element={<HomePage />}></Route>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="*" element={<><p>Página não existe</p></>} />
         </Routes>
       </Router>
     </div>

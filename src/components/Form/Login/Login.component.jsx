@@ -4,24 +4,26 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import * as Styled from "./Login.style";
 import { InputComponent } from "../Input/Input.component";
+import { useForm } from "react-hook-form";
 
 export const FormLoginComponent = () => {
   const navigate = useNavigate();
 
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
+  const redirectToHome = () => {
+    navigate("/home");
+  };
 
   const [users, setUsers] = useState({});
 
-  const isDisable = () => {
-    return (
-      !data.email ||
-      !data.password ||
-      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(data.email) ||
-      data.password < 8
-    );
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const submitForm = (data) => {
+    console.log(data);
   };
 
   const handleClick = (e) => {
@@ -44,13 +46,8 @@ export const FormLoginComponent = () => {
     fetchUserData();
   }, []);
 
-  const handleInput = (e) => {
-    e.preventDefault();
-    const { value, id } = e.target;
-    setData({ ...data, [id]: value });
-
-    {
-      /*
+  {
+    /*
     const isValid = users.filter((user) => {
       return user.email === data.email && user.password === data.password;
     });
@@ -61,12 +58,7 @@ export const FormLoginComponent = () => {
       navigate("/home");
     }
   */
-    }
-  };
-
-  const redirectToHome = () => {
-    navigate("/home");
-  };
+  }
 
   return (
     <div>
@@ -75,7 +67,7 @@ export const FormLoginComponent = () => {
         <ButtonNewUserComponent />
       </Styled.Action>
 
-      <Styled.Form onSubmit={redirectToHome}>
+      <Styled.Form onSubmit={handleSubmit(submitForm)}>
         <Styled.Header>
           <Styled.Title>Login</Styled.Title>
         </Styled.Header>
@@ -87,22 +79,34 @@ export const FormLoginComponent = () => {
               type="email"
               placeholder="Digite seu e-mail"
               label="E-mail"
+              register={{
+                ...register("email", {
+                  required: true,
+                  validate: {
+                    matchPath: (v) =>
+                      /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(v),
+                  },
+                }),
+              }}
             />
-            
+
             <InputComponent
               id="password"
               type="password"
               placeholder="Digite sua senha"
               label="Senha"
+              register={{
+                ...register("password", { required: true, minLength: 8 }),
+              }}
             />
           </Styled.InputElement>
         </Styled.InputGroup>
 
         <Button
+          disabled={errors.email || errors.password}
           style={{ width: "500px" }}
           variant="primary"
           type="submit"
-          disabled={isDisable()}
         >
           Entrar
         </Button>

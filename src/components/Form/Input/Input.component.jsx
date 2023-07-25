@@ -3,7 +3,7 @@ import * as Styled from "./Input.styled";
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-export const InputComponent = ({ label, type, id, placeholder }) => {
+export const InputComponent = ({ label, type, id, placeholder, register }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -20,7 +20,7 @@ export const InputComponent = ({ label, type, id, placeholder }) => {
               type={showPassword ? "text" : type}
               id={id}
               placeholder={placeholder}
-              className="Input"
+              {...register}
             />
             {type === "password" && (
               <Styled.Icon type="button" onClick={handleShowPassword}>
@@ -36,11 +36,7 @@ export const InputComponent = ({ label, type, id, placeholder }) => {
       )}
 
       {type === "textarea" && (
-        <Styled.TextArea
-          className="TextArea"
-          id={id}
-          placeholder={placeholder}
-        />
+        <Styled.TextArea id={id} placeholder={placeholder} {...register} />
       )}
     </Styled.InputGroup>
   );
@@ -51,4 +47,6 @@ InputComponent.propTypes = {
   type: PropTypes.string,
   id: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  register: PropTypes.any,
+  error: PropTypes.any,
 };

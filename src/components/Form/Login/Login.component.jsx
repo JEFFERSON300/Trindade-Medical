@@ -1,15 +1,26 @@
 import ButtonNewUserComponent from "../ButtonNewUser/ButtonNewUser.component";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import * as Styled from "./Login.style";
 import { InputComponent } from "../Input/Input.component";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../../contexts/auth/auth.context";
 
 export const FormLoginComponent = () => {
   const navigate = useNavigate();
-
+  
   const [users, setUsers] = useState({});
+
+  const { setAuth } = useContext(AuthContext);
+
+  const redirectToHome = (user) => {
+    setAuth({
+      user,
+      isLogged: true,
+    });
+    navigate('/');
+  }
 
   const {
     register,
@@ -18,27 +29,6 @@ export const FormLoginComponent = () => {
     watch,
     formState: { errors },
   } = useForm();
-
-  const submitForm = (data) => {
-    const { email, password } = data;
-
-    const user = users.find((u) => u.email === email);
-
-    if (!user) {
-      alert("Usuário não cadastrado");
-      reset();
-      return;
-    }
-
-    password === user.password
-      ? navigate("/home")
-      : alert("Usuário ou senha inválidos");
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    alert("Funcionalidade em construção...");
-  };
 
   const fetchUserData = () => {
     fetch("http://localhost:8000/")
@@ -55,6 +45,27 @@ export const FormLoginComponent = () => {
     fetchUserData();
   }, []);
 
+  const submitForm = (data) => {
+    const { email, password } = data;
+
+    const user = users.find((u) => u.email === email);
+
+    if (!user) {
+      alert("Usuário não cadastrado");
+      reset();
+      return;
+    }
+
+    password === user.password
+      ? redirectToHome(user)
+      : alert("Usuário ou senha inválidos");
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    alert("Funcionalidade em construção...");
+  };
+  
   return (
     <div>
       <Styled.Action>

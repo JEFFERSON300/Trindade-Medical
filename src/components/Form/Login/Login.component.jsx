@@ -1,18 +1,43 @@
 import ButtonNewUserComponent from "../ButtonNewUser/ButtonNewUser.component";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import * as Styled from "./Login.style";
+import { InputComponent } from "../Input/Input.component";
+import { useForm } from "react-hook-form";
 
 export const FormLoginComponent = () => {
   const navigate = useNavigate();
-  const emailInputElement = useRef();
-  const passwordInputElement = useRef();
-  const [users, setUsers] = useState([]);
+
+  const [users, setUsers] = useState({});
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const submitForm = (data) => {
+    const { email, password } = data;
+
+    const user = users.find((u) => u.email === email);
+
+    if (!user) {
+      alert("Usuário não cadastrado");
+      reset();
+      return;
+    }
+
+    password === user.password
+      ? navigate("/home")
+      : alert("Usuário ou senha inválidos");
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
-    window.alert("Funcionalidade em construção...");
+    alert("Funcionalidade em construção...");
   };
 
   const fetchUserData = () => {
@@ -20,35 +45,15 @@ export const FormLoginComponent = () => {
       .then((response) => {
         return response.json();
       })
-      .then((data) => {
-        setUsers(data);
+      .then((users) => {
+        setUsers(users);
       });
+    console.log(users);
   };
 
   useEffect(() => {
     fetchUserData();
   }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const dataInput = {
-      email: emailInputElement.current?.value,
-      password: passwordInputElement.current?.value,
-    };
-
-    const isValid = users.filter((user) => {
-      return (
-        user.email === dataInput.email && user.password === dataInput.password
-      );
-    });
-
-    if (Object.values(isValid).length === 0) {
-      navigate("/");
-    } else {
-      navigate("/home");
-    }
-  };
 
   return (
     <div>
@@ -57,34 +62,47 @@ export const FormLoginComponent = () => {
         <ButtonNewUserComponent />
       </Styled.Action>
 
-      <Styled.Form onSubmit={handleSubmit}>
+      <Styled.Form onSubmit={handleSubmit(submitForm)}>
         <Styled.Header>
           <Styled.Title>Login</Styled.Title>
         </Styled.Header>
 
         <Styled.InputGroup>
           <Styled.InputElement>
-            <label htmlFor="email">E-mail</label>
-            <Styled.Control
-              ref={emailInputElement}
-              type="email"
+            <InputComponent
               id="email"
+              type="email"
               placeholder="Digite seu e-mail"
+              label="E-mail"
+              register={{
+                ...register("email", {
+                  required: true,
+                  validate: {
+                    matchPath: (v) =>
+                      /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(v),
+                  },
+                }),
+              }}
             />
-          </Styled.InputElement>
 
-          <Styled.InputElement>
-            <label htmlFor="senha">Senha</label>
-            <Styled.Control
-              ref={passwordInputElement}
-              type="password"
+            <InputComponent
               id="password"
+              type="password"
               placeholder="Digite sua senha"
+              label="Senha"
+              register={{
+                ...register("password", { required: true, minLength: 8 }),
+              }}
             />
           </Styled.InputElement>
         </Styled.InputGroup>
 
-        <Button style={{ width: "500px" }} variant="primary" type="submit">
+        <Button
+          disabled={errors.email || errors.password}
+          style={{ width: "500px" }}
+          variant="primary"
+          type="submit"
+        >
           Entrar
         </Button>
 

@@ -7,6 +7,7 @@ export const Form = styled.form`
   align-items: center;
   margin: 20vh 0;
 `;
+
 export const Header = styled.div`
   text-align: start;
 `;
@@ -48,6 +49,12 @@ export const InputElement = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px 0 10px 0;
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 5px;
+  min-width: 500px;
 `;
 
 export const Subtitle = styled.p`
@@ -63,14 +70,4 @@ export const Subtitle = styled.p`
 export const EsqueciSenha = styled.a`
   text-decoration: none;
   margin-top: 20px;
-`;
-
-export const Control = styled.input`
-  display: flex;
-  padding: 8px;
-  align-items: flex-start;
-  align-self: stretch;
-  border-radius: 5px;
-  border: 1px solid #5281dc;
-  min-width: 500px;
 `;

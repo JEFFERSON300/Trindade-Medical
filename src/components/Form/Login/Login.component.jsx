@@ -9,26 +9,35 @@ import { useForm } from "react-hook-form";
 export const FormLoginComponent = () => {
   const navigate = useNavigate();
 
-  const redirectToHome = () => {
-    navigate("/home");
-  };
-
   const [users, setUsers] = useState({});
 
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
   } = useForm();
 
   const submitForm = (data) => {
-    console.log(data);
+    const { email, password } = data;
+
+    const user = users.find((u) => u.email === email);
+
+    if (!user) {
+      alert("Usuário não cadastrado");
+      reset();
+      return;
+    }
+
+    password === user.password
+      ? navigate("/home")
+      : alert("Usuário ou senha inválidos");
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    window.alert("Funcionalidade em construção...");
+    alert("Funcionalidade em construção...");
   };
 
   const fetchUserData = () => {
@@ -45,20 +54,6 @@ export const FormLoginComponent = () => {
   useEffect(() => {
     fetchUserData();
   }, []);
-
-  {
-    /*
-    const isValid = users.filter((user) => {
-      return user.email === data.email && user.password === data.password;
-    });
-
-    if (Object.values(isValid).length === 0) {
-      navigate("/");
-    } else {
-      navigate("/home");
-    }
-  */
-  }
 
   return (
     <div>

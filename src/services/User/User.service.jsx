@@ -1,44 +1,81 @@
-import { LocalStorageService } from "./LocalStorage.service"
+const BASE_URL = `http://localhost:3000/users`;
+const API_VIACEP = `http://viacep.com.br/ws/CEP/json/`;
 
-const Get = () => {
-    return LocalStorageService.get('users');
-}
+// --- GET
 
-const Create = (user) => {
-   const users = Get();
+const Get = async () => {
+  const response = await fetch(BASE_URL);
+  const data = await response.json();
+  return data;
+};
 
-   user = {
-    id: users.length + 1,
-    ...user,
-   }
+const GetCEP = async (cep) => {
+  const response = await fetch(
+    API_VIACEP.replace("CEP", cep.replace("-", "").trim())
+  );
+  const data = await response.json();
+  return data;
+};
 
-   LocalStorageService.set('users', [...users, user]);   
-}
+const Show = async (id) => {
+  const response = await fetch(`${BASE_URL}/${id}`);
+  const data = await response.json();
+  return data;
+};
 
-const Show = (id) => {
-    return Get().find(user => user.id === id);
-}
+const ShowByEmail = async (email) => {
+  let filter = "?";
+  if (email) {
+    filter += `email=${email}&`;
+  }
+  const response = await fetch(`${BASE_URL}${filter}`);
+  const data = await response.json();
+  return data[0];
+};
 
+const Create = async (data) => {
+  const response = await fetch(BASE_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const res = await response.json();
+  console.log(res && `Usuario ${data.email} criado com sucesso!`);
+};
 
-const ShowByEmail = (email) => {
-    return Get().find(user => user.email === email);
-}
+const Delete = async (id) => {
+  await fetch(`${BASE_URL}/${id}`, {
+    method: "DELETE",
+  });
+};
 
-const Delete = (id) => {
-    LocalStorageService.set('users', Get().filter(user => user.id !== id));
-   
-}
-const Update = (id, newUser) => {
-    const users = Get();
-    users[users.find(user => user.id === id).indexOf] = newUser;
-    LocalStorageService.set('users', users);
-}
+// newUser --> precisa vir assim
+
+// const data = {
+//   email: email,
+//   password: password,
+// };
+
+const Update = async (id, newUser) => {
+  const response = await fetch(`${BASE_URL}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newUser),
+  });
+  const res = await response.json();
+  console.log(res && `Usuario ${newUser.email} criado com sucesso!`);
+};
 
 export const UserService = {
-    Get,
-    Create,
-    Show,
-    ShowByEmail,
-    Delete,
-    Update
-}
+  Get,
+  GetCEP,
+  Create,
+  Show,
+  ShowByEmail,
+  Delete,
+  Update,
+};

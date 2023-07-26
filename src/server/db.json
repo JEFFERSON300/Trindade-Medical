@@ -1,14 +1,14 @@
 {
-    "users": [{
-        "id": 1,
-        "email": "jeffersonpedro300@gmail.com",
-        "password": "casa2014"
-      },
-      {
-        "id": 2,
-        "email": "manu@hotmail.com",
-        "password": "12345678"
-      }
-        
-    ]
+  "users": [
+    {
+      "email": "iza@gmail.com",
+      "password": "casa2020",
+      "id": 2
+    },
+    {
+      "email": "jeffersonpedro300@gmail.com",
+      "password": "casa2014",
+      "id": 3
+    }
+  ]
 }

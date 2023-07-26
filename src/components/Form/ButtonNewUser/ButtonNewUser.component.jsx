@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { UserService } from "../../../services/User/User.service";
 
 function ButtonNewUserComponent() {
   const [show, setShow] = useState(false);
@@ -21,16 +22,12 @@ function ButtonNewUserComponent() {
       email
     );
     if (password === password2 && password.length >= 8 && testEmail) {
-      fetch("http://localhost:8000", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      }).then(() => {
-        console.log("Post submitted successfully");
-        // tratar problema do erro do id duplicado
-      });
+      const data = {
+        email: email,
+        password: password,
+      };
+
+      UserService.Create(data);
       handleClose();
     } else {
       setShow(true);

@@ -1,5 +1,5 @@
 import ButtonNewUserComponent from "../ButtonNewUser/ButtonNewUser.component";
-import { useContext  } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import * as Styled from "./Login.style";
@@ -9,7 +9,7 @@ import { AuthContext } from "../../../contexts/auth/auth.context";
 import { UserService } from "../../../services/User/User.service";
 
 export const FormLoginComponent = () => {
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const { setAuth } = useContext(AuthContext);
 
@@ -18,24 +18,20 @@ export const FormLoginComponent = () => {
       user,
       isLogged: true,
     });
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   const {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors },
   } = useForm();
 
-  
-
-  const submitForm = (data) => {
+  const submitForm = async (data) => {
     const { email, password } = data;
 
-    // const user = users.find((u) => u.email === email);
-    const user = UserService.ShowByEmail(email);
+    const user = await UserService.ShowByEmail(email);
 
     if (!user) {
       alert("Usuário não cadastrado");
@@ -52,7 +48,7 @@ export const FormLoginComponent = () => {
     e.preventDefault();
     alert("Funcionalidade em construção...");
   };
-  
+
   return (
     <div>
       <Styled.Action>

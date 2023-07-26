@@ -1,23 +1,17 @@
 import { HomePage } from "./pages/Home/Home.page";
 import { LoginPage } from "./pages/Login/Login.page";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { LocalStorageService } from "./services/User/LocalStorage.service";
+// import { LocalStorageService } from "./services/User/LocalStorage.service";
 
-if (!LocalStorageService.get('users')) {
-  LocalStorageService.set('users', [
-    {
-      "id": 1,
-      "email": "jeffersonpedro300@gmail.com",
-      "password": "casa2014"
-    },
-    {
-      "id": 2,
-      "email": "manu@hotmail.com",
-      "password": "12345678"
-    }
-  ] )
-
-}
+// if (!LocalStorageService.get('users')) {
+//   LocalStorageService.set('users', [
+//     {
+//       "id": 1,
+//       "email": "jeffersonpedro300@gmail.com",
+//       "password": "casa2014"
+//     },
+//   ] )
+// }
 
 function App() {
   return (

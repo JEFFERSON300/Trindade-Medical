@@ -1,11 +1,10 @@
 import SideBarComponent from "../../components/SideBar/SideBar";
 import NavbarComponent from "../../components/Toolbar/Navbar/Navbar.component";
 import { Navigate } from "react-router";
-import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/auth.context";
 import CardComponent from "../../components/Card/Card.component";
 import { UserService } from "../../services/User/User.service";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";

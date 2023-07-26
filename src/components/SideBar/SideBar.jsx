@@ -41,11 +41,14 @@ function SideBarComponent() {
               {" "}
               Geral{" "}
             </MenuItem>
-            <MenuItem component={<Link to="/home" />} icon={<AiFillSignal />}>
+            <MenuItem component={<Link to="/" />} icon={<AiFillSignal />}>
               {" "}
               Inicio{" "}
             </MenuItem>
-            <MenuItem component={<Link to="/" />} icon={<AiOutlineLogout />}>
+            <MenuItem
+              component={<Link to="/login" />}
+              icon={<AiOutlineLogout />}
+            >
               {" "}
               Sair{" "}
             </MenuItem>
@@ -56,7 +59,10 @@ function SideBarComponent() {
               {" "}
               Pacientes{" "}
             </MenuItem>
-            <MenuItem component={<Link to="" />} icon={<AiOutlinePlusSquare />}>
+            <MenuItem
+              component={<Link to="/patient" />}
+              icon={<AiOutlinePlusSquare />}
+            >
               {" "}
               Cadastrar{" "}
             </MenuItem>

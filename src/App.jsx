@@ -1,6 +1,7 @@
 import { HomePage } from "./pages/Home/Home.page";
 import { LoginPage } from "./pages/Login/Login.page";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { RegisterPatientPage } from "./pages/RegisterPatient/RegisterPatient.page";
 // import { LocalStorageService } from "./services/User/LocalStorage.service";
 
 // if (!LocalStorageService.get('users')) {
@@ -18,6 +19,7 @@ function App() {
     <div>
       <Router>
         <Routes>
+          <Route path="/patient" element={<RegisterPatientPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<HomePage />}></Route>
           <Route

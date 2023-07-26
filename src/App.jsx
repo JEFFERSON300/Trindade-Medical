@@ -20,7 +20,14 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<HomePage />}></Route>
-          <Route path="*" element={<><p>Página não existe</p></>} />
+          <Route
+            path="*"
+            element={
+              <>
+                <p>Página não existe</p>
+              </>
+            }
+          />
         </Routes>
       </Router>
     </div>

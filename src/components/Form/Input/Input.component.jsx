@@ -10,6 +10,7 @@ export const InputComponent = ({
   placeholder,
   register,
   options,
+  sizeInput,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,6 +26,7 @@ export const InputComponent = ({
         <div>
           <Styled.InputContainer>
             <Styled.Input
+              $width={sizeInput}
               type={showPassword ? "text" : type}
               id={id}
               placeholder={placeholder}
@@ -50,7 +52,7 @@ export const InputComponent = ({
       {type === "label" && (
         <>
           <Styled.InputContainer>
-            <Styled.InputSelect id={id}>
+            <Styled.InputSelect $width={sizeInput} id={id}>
               {options.map((u) => {
                 console.log(u);
                 return (
@@ -75,4 +77,5 @@ InputComponent.propTypes = {
   register: PropTypes.any,
   options: PropTypes.arrayOf(PropTypes.string),
   error: PropTypes.any,
+  sizeInput: PropTypes.string,
 };

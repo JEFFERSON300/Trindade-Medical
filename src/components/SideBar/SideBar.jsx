@@ -16,7 +16,6 @@ function SideBarComponent() {
     <div
       style={{
         display: "flex",
-        height: "100vh",
         minHeight: "400px",
       }}
     >
@@ -60,7 +59,7 @@ function SideBarComponent() {
               Pacientes{" "}
             </MenuItem>
             <MenuItem
-              component={<Link to="/patient" />}
+              component={<Link to="/patients" />}
               icon={<AiOutlinePlusSquare />}
             >
               {" "}

@@ -1,4 +1,4 @@
-import { number } from "prop-types";
+import { PropTypes } from "prop-types";
 import styled from "styled-components";
 
 export const InputGroup = styled.div`
@@ -20,7 +20,7 @@ export const Input = styled.input`
   padding: 7px;
   align-items: flex-start;
   align-self: stretch;
-  min-width: 100%;
+  width: ${(props) => props.$width};
   border-radius: 5px;
 `;
 export const TextArea = styled.textarea`
@@ -55,6 +55,14 @@ export const InputSelect = styled.select`
   padding: 7px;
   align-items: flex-start;
   align-self: stretch;
-  min-width: 100px;
+  width: ${(props) => props.$width};
   border-radius: 5px;
 `;
+
+Input.propTypes = {
+  $width: PropTypes.string,
+};
+
+InputSelect.propTypes = {
+  $width: PropTypes.string,
+};

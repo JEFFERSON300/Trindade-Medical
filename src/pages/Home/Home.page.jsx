@@ -27,7 +27,7 @@ export const HomePage = () => {
 
         <div style={{ flex: "1" }}>
           <header>
-            <NavbarComponent style={{}} name="Home" />
+            <NavbarComponent name="ESTATÍSTICAS E INFORMAÇÕES" />
           </header>
 
           <main style={{ padding: "2rem" }}>

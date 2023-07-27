@@ -3,7 +3,14 @@ import * as Styled from "./Input.styled";
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-export const InputComponent = ({ label, type, id, placeholder, register }) => {
+export const InputComponent = ({
+  label,
+  type,
+  id,
+  placeholder,
+  register,
+  options,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -13,7 +20,8 @@ export const InputComponent = ({ label, type, id, placeholder, register }) => {
   return (
     <Styled.InputGroup>
       <Styled.Label htmlFor="{id}">{label}</Styled.Label>
-      {type !== "textarea" && (
+
+      {type !== "textarea" && type !== "label" && (
         <div>
           <Styled.InputContainer>
             <Styled.Input
@@ -38,6 +46,23 @@ export const InputComponent = ({ label, type, id, placeholder, register }) => {
       {type === "textarea" && (
         <Styled.TextArea id={id} placeholder={placeholder} {...register} />
       )}
+
+      {type === "label" && (
+        <>
+          <Styled.InputContainer>
+            <Styled.InputSelect id={id}>
+              {options.map((u) => {
+                console.log(u);
+                return (
+                  <option key={u} value={u}>
+                    {u}
+                  </option>
+                );
+              })}
+            </Styled.InputSelect>
+          </Styled.InputContainer>
+        </>
+      )}
     </Styled.InputGroup>
   );
 };
@@ -48,5 +73,6 @@ InputComponent.propTypes = {
   id: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   register: PropTypes.any,
+  options: PropTypes.arrayOf(PropTypes.string),
   error: PropTypes.any,
 };

@@ -87,7 +87,10 @@ function SideBarComponent() {
             </MenuItem>
           </div>
 
-          <div onClick={() => setCollapsed(!collapsed)}>
+          <div
+            style={{ marginTop: "20rem" }}
+            onClick={() => setCollapsed(!collapsed)}
+          >
             <SwitchButtonComponent />
           </div>
         </Menu>

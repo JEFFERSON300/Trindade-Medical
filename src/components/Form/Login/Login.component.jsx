@@ -64,6 +64,7 @@ export const FormLoginComponent = () => {
         <Styled.InputGroup>
           <Styled.InputElement>
             <InputComponent
+              sizeInput="500px"
               id="email"
               type="email"
               placeholder="Digite seu e-mail"
@@ -80,6 +81,7 @@ export const FormLoginComponent = () => {
             />
 
             <InputComponent
+              sizeInput="500px"
               id="password"
               type="password"
               placeholder="Digite sua senha"

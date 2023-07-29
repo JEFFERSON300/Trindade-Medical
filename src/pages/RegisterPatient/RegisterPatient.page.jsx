@@ -7,16 +7,88 @@ import { useForm } from "react-hook-form";
 import { InputComponent } from "../../components/Form/Input/Input.component";
 import { SwitchButtonComponent } from "../../components/SwitchButton/SwitchButton.component";
 import Button from "react-bootstrap/Button";
+import { ServiceAPI } from "../../services/User/API.service";
+import { useEffect } from "react";
+import { PatientService } from "../../services/User/Patient.service";
 
 export const RegisterPatientPage = () => {
   const { auth } = useContext(AuthContext);
 
+  const maskPhone = (value) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{2})(\d)/, "($1) $2")
+      .replace(/(\d{5})(\d)/, "$1-$2")
+      .replace(/(-\d{4})(\d+?)$/, "$1");
+  };
+
+  const maskCPF = (value) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+      .replace(/(-\d{2})\d+?$/, "$1");
+  };
+
+  const maskDate = (value) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{2})(\d)/, "$1/$2")
+      .replace(/(\d{2})(\d)/, "$1/$2")
+      .replace(/(\d{4})(\d)/, "$1");
+  };
+
+  const handleInputChange = async () => {
+    const cep = getValues("CEP");
+    const API = await ServiceAPI.GetCEP(cep);
+
+    if (Object.keys(API).includes("cep")) {
+      setValue("city", API.localidade);
+      setValue("state", API.uf);
+      setValue("publicPlace", API.logradouro);
+      setValue("neighborhood", API.bairro);
+    } else {
+      alert("CEP não existe, digite novamente");
+    }
+  };
+
+  const submitForm = (data) => {
+    PatientService.Create(data);
+    console.log("cadastrado");
+  };
+
   const {
     register,
     handleSubmit,
-    reset,
+    watch,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    const cep = watch("CEP");
+    if (cep.length > 7) {
+      handleInputChange();
+    }
+  }, [watch("CEP")]);
+
+  useEffect(() => {
+    setValue("date", maskDate(watch("date")));
+  }, [watch("date")]);
+
+  useEffect(() => {
+    setValue("cpf", maskCPF(watch("cpf")));
+  }, [watch("cpf")]);
+
+  useEffect(() => {
+    setValue("telephone", maskPhone(watch("telephone")));
+  }, [watch("telephone")]);
+
+  useEffect(() => {
+    setValue("emergencyContaty", maskPhone(watch("emergencyContaty")));
+  }, [watch("emergencyContaty")]);
 
   const render = () => {
     return (
@@ -31,7 +103,7 @@ export const RegisterPatientPage = () => {
             <form
               style={{
                 width: "90%",
-                padding: "12px 20px",
+                padding: "2px 20px",
                 margin: "8px 50px",
                 display: "inline-block",
                 border: "1px solid #ccc",
@@ -39,22 +111,50 @@ export const RegisterPatientPage = () => {
                 boxShadow: "2px 2px 4px #000000",
                 borderRadius: "10px",
               }}
-              onSubmit={handleSubmit()}
+              onSubmit={handleSubmit(submitForm)}
             >
               <label htmlFor="Identificação"></label>
+
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: "30px",
+                  gap: "10px",
                 }}
               >
-                <legend>Identificação</legend>
+                <legend style={{ padding: "0px 25px" }}>Identificação</legend>
 
                 <SwitchButtonComponent />
-                <Button variant="outline-primary">Deletar</Button>
-                <Button>Salvar</Button>
+                <Button
+                  disabled={
+                    errors.name ||
+                    errors.gender ||
+                    errors.date ||
+                    errors.cpf ||
+                    errors.rg ||
+                    errors.civilStatus ||
+                    errors.telephone
+                  }
+                  variant="outline-primary"
+                >
+                  Deletar
+                </Button>
+
+                <Button
+                  type="submit"
+                  disabled={
+                    errors.name ||
+                    errors.gender ||
+                    errors.date ||
+                    errors.cpf ||
+                    errors.rg ||
+                    errors.civilStatus ||
+                    errors.telephone
+                  }
+                >
+                  Salvar
+                </Button>
               </div>
 
               <div
@@ -73,6 +173,8 @@ export const RegisterPatientPage = () => {
                   register={{
                     ...register("name", {
                       required: true,
+                      minLength: 5,
+                      maxLength: 50,
                     }),
                   }}
                 />
@@ -103,11 +205,11 @@ export const RegisterPatientPage = () => {
 
                 <InputComponent
                   sizeInput="350px"
-                  id="data"
-                  type="date"
+                  id="date"
+                  type="text"
                   label="Data Nascimento"
                   register={{
-                    ...register("data", {
+                    ...register("date", {
                       required: true,
                     }),
                   }}
@@ -116,11 +218,14 @@ export const RegisterPatientPage = () => {
                 <InputComponent
                   sizeInput="450px"
                   id="cpf"
-                  type="number"
+                  type="text"
                   label="CPF"
                   register={{
                     ...register("cpf", {
                       required: true,
+                      validate: {
+                        matchPath: (v) => /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(v),
+                      },
                     }),
                   }}
                 />
@@ -128,11 +233,12 @@ export const RegisterPatientPage = () => {
                 <InputComponent
                   sizeInput="450px"
                   id="rg"
-                  type="number"
+                  type="text"
                   label="RG"
                   register={{
                     ...register("rg", {
                       required: true,
+                      maxLength: 20,
                     }),
                   }}
                 />
@@ -160,11 +266,14 @@ export const RegisterPatientPage = () => {
                 <InputComponent
                   sizeInput="450px"
                   id="telephone"
-                  type="tel"
+                  type="text"
                   label="Telefone"
                   register={{
                     ...register("telephone", {
                       required: true,
+                      validate: {
+                        matchPath: (v) => /^\(\d{2}\) \d{5}-\d{4}$/.test(v),
+                      },
                     }),
                   }}
                 />
@@ -176,7 +285,6 @@ export const RegisterPatientPage = () => {
                   label="E-mail"
                   register={{
                     ...register("email", {
-                      required: true,
                       validate: {
                         matchPath: (v) =>
                           /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(v),
@@ -196,10 +304,45 @@ export const RegisterPatientPage = () => {
                     }),
                   }}
                 />
+
+                <InputComponent
+                  sizeInput="450px"
+                  id="emergencyContaty"
+                  type="text"
+                  label="Contato de Emergência"
+                  register={{
+                    ...register("emergencyContaty", {
+                      required: true,
+                      validate: {
+                        matchPath: (v) => /^\(\d{2}\) \d{5}-\d{4}$/.test(v),
+                      },
+                    }),
+                  }}
+                />
+
+                <InputComponent
+                  sizeInput="450px"
+                  id="allergies"
+                  type="text"
+                  label="Lista de Alergias"
+                  register={{
+                    ...register("allergies"),
+                  }}
+                />
+
+                <InputComponent
+                  sizeInput="450px"
+                  id="care"
+                  type="text"
+                  label="Lista de Cuidados"
+                  register={{
+                    ...register("care"),
+                  }}
+                />
               </div>
 
               <label htmlFor="Convênio"></label>
-              <legend>Convênio</legend>
+              <legend style={{ padding: "0px 25px" }}>Convênio</legend>
               <div
                 style={{
                   display: "flex",
@@ -214,37 +357,33 @@ export const RegisterPatientPage = () => {
                   type="text"
                   label="Convênio"
                   register={{
-                    ...register("convention", {
-                      required: true,
-                    }),
+                    ...register("convention"),
                   }}
                 />
+
                 <InputComponent
                   sizeInput="450px"
                   id="numberOfCard"
                   type="number"
                   label="Número da carteira"
                   register={{
-                    ...register("numberOfCard", {
-                      required: true,
-                    }),
+                    ...register("numberOfCard"),
                   }}
                 />
+
                 <InputComponent
                   sizeInput="450px"
                   id="validity"
-                  type="date"
+                  type="text"
                   label="Validade"
                   register={{
-                    ...register("validity", {
-                      required: true,
-                    }),
+                    ...register("validity"),
                   }}
                 />
               </div>
 
               <label htmlFor="Dados de Endereço"></label>
-              <legend>Dados de Endereço</legend>
+              <legend style={{ padding: "0px 25px" }}>Dados de Endereço</legend>
               <div
                 style={{
                   display: "flex",
@@ -256,34 +395,30 @@ export const RegisterPatientPage = () => {
                 <InputComponent
                   sizeInput="450px"
                   id="CEP"
-                  type="number"
+                  type="text"
                   label="CEP"
                   register={{
-                    ...register("CEP", {
-                      required: true,
-                    }),
+                    ...register("CEP"),
                   }}
                 />
+
                 <InputComponent
                   sizeInput="450px"
                   id="city"
                   type="text"
                   label="Cidade"
                   register={{
-                    ...register("city", {
-                      required: true,
-                    }),
+                    ...register("city"),
                   }}
                 />
+
                 <InputComponent
                   sizeInput="450px"
                   id="state"
                   type="text"
                   label="Estado"
                   register={{
-                    ...register("state", {
-                      required: true,
-                    }),
+                    ...register("state"),
                   }}
                 />
 
@@ -293,9 +428,7 @@ export const RegisterPatientPage = () => {
                   type="text"
                   label="Logradouro"
                   register={{
-                    ...register("publicPlace", {
-                      required: true,
-                    }),
+                    ...register("publicPlace"),
                   }}
                 />
 
@@ -305,9 +438,7 @@ export const RegisterPatientPage = () => {
                   type="number"
                   label="Número"
                   register={{
-                    ...register("number", {
-                      required: true,
-                    }),
+                    ...register("number"),
                   }}
                 />
 
@@ -317,9 +448,7 @@ export const RegisterPatientPage = () => {
                   type="text"
                   label="Complemento"
                   register={{
-                    ...register("complement", {
-                      required: true,
-                    }),
+                    ...register("complement"),
                   }}
                 />
 
@@ -329,20 +458,17 @@ export const RegisterPatientPage = () => {
                   type="text"
                   label="Bairro"
                   register={{
-                    ...register("neighborhood", {
-                      required: true,
-                    }),
+                    ...register("neighborhood"),
                   }}
                 />
+
                 <InputComponent
                   sizeInput="450px"
                   id="referencePoint"
                   type="text"
                   label="Ponto de Referência"
                   register={{
-                    ...register("referencePoint", {
-                      required: true,
-                    }),
+                    ...register("referencePoint"),
                   }}
                 />
               </div>

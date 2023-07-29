@@ -52,9 +52,8 @@ export const InputComponent = ({
       {type === "label" && (
         <>
           <Styled.InputContainer>
-            <Styled.InputSelect $width={sizeInput} id={id}>
+            <Styled.InputSelect $width={sizeInput} id={id} {...register}>
               {options.map((u) => {
-                console.log(u);
                 return (
                   <option key={u} value={u}>
                     {u}

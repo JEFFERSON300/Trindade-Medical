@@ -3,11 +3,11 @@ import NavbarComponent from "../../components/Toolbar/Navbar/Navbar.component";
 import { Navigate } from "react-router";
 import { AuthContext } from "../../contexts/auth/auth.context";
 import CardComponent from "../../components/Card/Card.component";
-import { UserService } from "../../services/User/User.service";
 import { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import { PatientService } from "../../services/User/Patient.service";
 
 export const HomePage = () => {
   const { auth } = useContext(AuthContext);
@@ -15,7 +15,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     (async () => {
-      const users = await UserService.Get();
+      const users = await PatientService.Get();
       setUsers(users);
     })();
   }, []);

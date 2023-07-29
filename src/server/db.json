@@ -10,5 +10,30 @@
       "password": "casa2014",
       "id": 3
     }
+  ],
+  "patients": [
+    {
+      "name": "jefferson",
+      "date": "2023-07-04",
+      "cpf": "07418631464",
+      "rg": "7635964",
+      "telephone": "81997194686",
+      "email": "jeffersonpedro300@gmail.com",
+      "nationality": "brasileira",
+      "emergencyContaty": "48999866394",
+      "allergies": "",
+      "care": "",
+      "convention": "unimed",
+      "numberOfCard": "99999",
+      "validity": "2023-07-22",
+      "CEP": "88040405",
+      "state": "SC",
+      "publicPlace": "Servidão Cristiano Wanderley Faria",
+      "number": "",
+      "complement": "",
+      "neighborhood": "Trindade",
+      "referencePoint": "",
+      "id": 1
+    }
   ]
 }

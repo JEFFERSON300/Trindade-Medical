@@ -16,7 +16,6 @@ function SideBarComponent() {
     <div
       style={{
         display: "flex",
-        height: "100vh",
         minHeight: "400px",
       }}
     >
@@ -41,11 +40,14 @@ function SideBarComponent() {
               {" "}
               Geral{" "}
             </MenuItem>
-            <MenuItem component={<Link to="/home" />} icon={<AiFillSignal />}>
+            <MenuItem component={<Link to="/" />} icon={<AiFillSignal />}>
               {" "}
               Inicio{" "}
             </MenuItem>
-            <MenuItem component={<Link to="/" />} icon={<AiOutlineLogout />}>
+            <MenuItem
+              component={<Link to="/login" />}
+              icon={<AiOutlineLogout />}
+            >
               {" "}
               Sair{" "}
             </MenuItem>
@@ -56,7 +58,10 @@ function SideBarComponent() {
               {" "}
               Pacientes{" "}
             </MenuItem>
-            <MenuItem component={<Link to="" />} icon={<AiOutlinePlusSquare />}>
+            <MenuItem
+              component={<Link to="/patients" />}
+              icon={<AiOutlinePlusSquare />}
+            >
               {" "}
               Cadastrar{" "}
             </MenuItem>
@@ -81,7 +86,10 @@ function SideBarComponent() {
             </MenuItem>
           </div>
 
-          <div onClick={() => setCollapsed(!collapsed)}>
+          <div
+            style={{ marginTop: "20rem" }}
+            onClick={() => setCollapsed(!collapsed)}
+          >
             <SwitchButtonComponent />
           </div>
         </Menu>

@@ -5,7 +5,7 @@ export const LoginPage = () => {
   return (
     <Styled.Login>
       <Styled.LoginLeft>
-        <Styled.Img src="/login.jpg" alt="" width="500" />
+        <Styled.Img src="/login.jpg" alt="" width="500px" />
       </Styled.LoginLeft>
 
       <Styled.LoginRigth>

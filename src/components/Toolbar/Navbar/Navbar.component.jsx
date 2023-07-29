@@ -9,7 +9,7 @@ function NavbarComponent(props) {
       <Navbar className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#">
-            <h2 style={{ color: "gray" }}>{props.name}</h2>
+            <h4 style={{ color: "gray" }}>{props.name}</h4>
           </Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>Signed : {}</Navbar.Text>

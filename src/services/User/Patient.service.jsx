@@ -1,4 +1,4 @@
-const BASE_URL = `http://localhost:3000/users`;
+const BASE_URL = `http://localhost:3000/patients`;
 
 // --- GET
 
@@ -61,7 +61,7 @@ const Update = async (id, newUser) => {
   console.log(res && `Usuario ${newUser.email} criado com sucesso!`);
 };
 
-export const UserService = {
+export const PatientService = {
   Get,
   Create,
   Show,

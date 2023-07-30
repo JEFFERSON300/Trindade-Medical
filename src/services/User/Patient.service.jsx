@@ -33,7 +33,8 @@ const Create = async (data) => {
     body: JSON.stringify(data),
   });
   const res = await response.json();
-  console.log(res && `Usuario ${data.email} criado com sucesso!`);
+  alert(res && `Paciente cadastrado com sucesso!`);
+  return res;
 };
 
 const Delete = async (id) => {

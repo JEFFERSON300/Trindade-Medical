@@ -54,8 +54,8 @@ export const RegisterPatientPage = () => {
   };
 
   const submitForm = (data) => {
-    PatientService.Create(data);
-    console.log("cadastrado");
+    const res = PatientService.Create(data);
+    res && reset();
   };
 
   const {
@@ -64,6 +64,7 @@ export const RegisterPatientPage = () => {
     watch,
     setValue,
     getValues,
+    reset,
     formState: { errors },
   } = useForm();
 

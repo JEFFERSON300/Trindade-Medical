@@ -11,6 +11,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { PatientService } from "../../services/User/Patient.service";
 import { ConsultService } from "../../services/User/Consult.service";
 import { ExamService } from "../../services/User/Exam.service";
+import CardUserComponent from "../../components/CardUser/CardUser.component";
 
 export const HomePage = () => {
   const { auth } = useContext(AuthContext);
@@ -36,6 +37,22 @@ export const HomePage = () => {
   }, []);
 
   const render = () => {
+    const verifyInput = () => {};
+
+    const menuItem = (item) => {
+      return (
+        <CardUserComponent
+          name={item.name}
+          telephone={item.telephone}
+          convention={item.convention}
+        />
+      );
+    };
+
+    const menuEmpty = () => {
+      return <p>Não há usuários cadastrados no sistema</p>;
+    };
+
     return (
       <div style={{ display: "flex" }}>
         <SideBarComponent style={{}} />
@@ -49,6 +66,7 @@ export const HomePage = () => {
             <h2>Estatisticas do Sistema</h2>
             <div
               style={{
+                width: "90%",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -60,30 +78,43 @@ export const HomePage = () => {
               <CardComponent numero={consults.length} opcao={2} />
               <CardComponent numero={exams.length} opcao={3} />
             </div>
-
             <h2>Informações Rápidas de Pacientes</h2>
+
             <InputGroup
               style={{
-                maxWidth: "90vw",
+                maxWidth: "90%",
                 textAlign: "center",
                 marginTop: "2rem",
               }}
             >
               <Form.Control
                 style={{ borderRadius: "5px" }}
-                placeholder="Digite o nome do paciente"
+                placeholder="Digite o nome, telefone ou e-mail do paciente"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
               />
               <Button
                 style={{ marginLeft: "1rem", borderRadius: "5px" }}
-                variant="outline-secondary"
+                variant="outline-primary"
                 id="button-addon2"
+                onClick={verifyInput}
               >
                 Buscar
               </Button>
             </InputGroup>
           </main>
+
+          <body
+            style={{
+              padding: "2rem",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "2rem",
+              maxWidth: "90%",
+            }}
+          >
+            {patients.length > 0 ? patients.map(menuItem) : menuEmpty()}
+          </body>
         </div>
       </div>
     );

@@ -33,7 +33,7 @@ const Create = async (data) => {
     body: JSON.stringify(data),
   });
   const res = await response.json();
-  console.log(res && `Usuario criado com sucesso!`);
+  alert(res && `Exame cadastrado com sucesso!`);
 };
 
 const Delete = async (id) => {

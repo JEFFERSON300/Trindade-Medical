@@ -1,22 +1,30 @@
 import SideBarComponent from "../../components/SideBar/SideBar";
 import NavbarComponent from "../../components/Toolbar/Navbar/Navbar.component";
 import { Navigate } from "react-router";
+import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/auth.context";
 import CardComponent from "../../components/Card/Card.component";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { PatientService } from "../../services/User/Patient.service";
+import { ConsultService } from "../../services/User/Consult.service";
 
 export const HomePage = () => {
   const { auth } = useContext(AuthContext);
-  const [users, setUsers] = useState(0);
+  const [patients, setPatients] = useState(0);
+  const [consults, setConsults] = useState(0);
 
   useEffect(() => {
     (async () => {
-      const users = await PatientService.Get();
-      setUsers(users);
+      const patients = await PatientService.Get();
+      setPatients(patients);
+    })();
+
+    (async () => {
+      const consults = await ConsultService.Get();
+      setConsults(consults);
     })();
   }, []);
 
@@ -27,7 +35,7 @@ export const HomePage = () => {
 
         <div style={{ flex: "1" }}>
           <header>
-            <NavbarComponent name="ESTATÍSTICAS E INFORMAÇÕES" />
+            <NavbarComponent style={{}} name="Home" />
           </header>
 
           <main style={{ padding: "2rem" }}>
@@ -41,9 +49,9 @@ export const HomePage = () => {
                 padding: "2rem",
               }}
             >
-              <CardComponent numero={users.length} opcao={1} />
-              <CardComponent numero={users.length} opcao={2} />
-              <CardComponent numero={users.length} opcao={3} />
+              <CardComponent numero={patients.length} opcao={1} />
+              <CardComponent numero={consults.length} opcao={2} />
+              <CardComponent numero={patients.length} opcao={3} />
             </div>
 
             <h2>Informações Rápidas de Pacientes</h2>

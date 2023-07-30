@@ -98,13 +98,16 @@ export const RegisterPatientPage = () => {
           <header>
             <NavbarComponent name="CADASTRO DE PACIENTE" />
           </header>
-          <h1 style={{ padding: "2rem" }}>Preencha os campos para cadastrar</h1>
-          <main>
+
+          <main style={{ padding: "2rem" }}>
+            <h1 style={{ paddingBottom: "2rem" }}>
+              Preencha os campos para cadastrar
+            </h1>
             <form
               style={{
                 width: "90%",
-                padding: "2px 20px",
-                margin: "8px 50px",
+                padding: "0px 20px 20px 20px",
+                margin: "30px 0px",
                 display: "inline-block",
                 border: "1px solid #ccc",
                 boxSizing: "border-box",
@@ -166,7 +169,7 @@ export const RegisterPatientPage = () => {
                 }}
               >
                 <InputComponent
-                  sizeInput="650px"
+                  sizeInput="602px"
                   id="name"
                   type="text"
                   label="Nome Completo"
@@ -216,7 +219,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="cpf"
                   type="text"
                   label="CPF"
@@ -231,7 +234,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="rg"
                   type="text"
                   label="RG"
@@ -244,7 +247,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="civilStatus"
                   type="label"
                   label="Estado Civil"
@@ -264,7 +267,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="telephone"
                   type="text"
                   label="Telefone"
@@ -279,7 +282,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="email"
                   type="email"
                   label="E-mail"
@@ -294,7 +297,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="nationality"
                   type="text"
                   label="Naturalidade"
@@ -306,7 +309,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="emergencyContaty"
                   type="text"
                   label="Contato de Emergência"
@@ -321,7 +324,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="allergies"
                   type="text"
                   label="Lista de Alergias"
@@ -331,7 +334,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="care"
                   type="text"
                   label="Lista de Cuidados"
@@ -352,7 +355,7 @@ export const RegisterPatientPage = () => {
                 }}
               >
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="convention"
                   type="text"
                   label="Convênio"
@@ -362,7 +365,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="numberOfCard"
                   type="number"
                   label="Número da carteira"
@@ -372,7 +375,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="validity"
                   type="text"
                   label="Validade"
@@ -393,7 +396,7 @@ export const RegisterPatientPage = () => {
                 }}
               >
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="CEP"
                   type="text"
                   label="CEP"
@@ -403,7 +406,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="city"
                   type="text"
                   label="Cidade"
@@ -413,7 +416,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="state"
                   type="text"
                   label="Estado"
@@ -423,7 +426,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="1120px"
+                  sizeInput="1102px"
                   id="publicPlace"
                   type="text"
                   label="Logradouro"
@@ -433,7 +436,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="250px"
+                  sizeInput="220px"
                   id="number"
                   type="number"
                   label="Número"
@@ -443,7 +446,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="complement"
                   type="text"
                   label="Complemento"
@@ -453,7 +456,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="neighborhood"
                   type="text"
                   label="Bairro"
@@ -463,7 +466,7 @@ export const RegisterPatientPage = () => {
                 />
 
                 <InputComponent
-                  sizeInput="450px"
+                  sizeInput="434px"
                   id="referencePoint"
                   type="text"
                   label="Ponto de Referência"

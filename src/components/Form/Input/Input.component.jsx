@@ -11,6 +11,8 @@ export const InputComponent = ({
   register,
   options,
   sizeInput,
+  widthT,
+  heightT,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -46,7 +48,13 @@ export const InputComponent = ({
       )}
 
       {type === "textarea" && (
-        <Styled.TextArea id={id} placeholder={placeholder} {...register} />
+        <Styled.TextArea
+          $width={widthT}
+          $height={heightT}
+          id={id}
+          placeholder={placeholder}
+          {...register}
+        />
       )}
 
       {type === "label" && (
@@ -77,4 +85,6 @@ InputComponent.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string),
   error: PropTypes.any,
   sizeInput: PropTypes.string,
+  widthT: PropTypes.string,
+  heightT: PropTypes.string,
 };

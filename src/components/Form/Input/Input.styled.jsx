@@ -24,13 +24,14 @@ export const Input = styled.input`
   border-radius: 5px;
 `;
 export const TextArea = styled.textarea`
-  flex: 1 0 0;
   color: #aaa;
   font-family: Segoe UI;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  width: ${(props) => props.$width || "1340px"};
+  height: ${(props) => props.$height || "200px"};
 `;
 
 export const InputContainer = styled.div`
@@ -65,4 +66,9 @@ Input.propTypes = {
 
 InputSelect.propTypes = {
   $width: PropTypes.string,
+};
+
+TextArea.propTypes = {
+  $width: PropTypes.string,
+  $height: PropTypes.string,
 };

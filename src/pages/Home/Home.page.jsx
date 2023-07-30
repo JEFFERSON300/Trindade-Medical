@@ -10,11 +10,13 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { PatientService } from "../../services/User/Patient.service";
 import { ConsultService } from "../../services/User/Consult.service";
+import { ExamService } from "../../services/User/Exam.service";
 
 export const HomePage = () => {
   const { auth } = useContext(AuthContext);
   const [patients, setPatients] = useState(0);
   const [consults, setConsults] = useState(0);
+  const [exams, setExams] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -25,6 +27,11 @@ export const HomePage = () => {
     (async () => {
       const consults = await ConsultService.Get();
       setConsults(consults);
+    })();
+
+    (async () => {
+      const exams = await ExamService.Get();
+      setExams(exams);
     })();
   }, []);
 
@@ -51,7 +58,7 @@ export const HomePage = () => {
             >
               <CardComponent numero={patients.length} opcao={1} />
               <CardComponent numero={consults.length} opcao={2} />
-              <CardComponent numero={patients.length} opcao={3} />
+              <CardComponent numero={exams.length} opcao={3} />
             </div>
 
             <h2>Informações Rápidas de Pacientes</h2>

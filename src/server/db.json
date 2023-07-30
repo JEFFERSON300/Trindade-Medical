@@ -35,5 +35,25 @@
       "referencePoint": "",
       "id": 1
     }
+  ],
+  "consults": [
+    {
+      "reasonOfConsult": "dores de cabeça",
+      "dateOfConsult": "30/07/2023",
+      "timeOfConsult": "09:23",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+      "medication": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+      "dosage": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+      "id": 1
+    },
+    {
+      "reasonOfConsult": "dor de barriga",
+      "dateOfConsult": "30/07/2023",
+      "timeOfConsult": "10:00",
+      "description": "t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+      "medication": "",
+      "dosage": "t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+      "id": 2
+    }
   ]
 }

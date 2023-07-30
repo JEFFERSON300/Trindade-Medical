@@ -14,9 +14,9 @@ import { ConsultService } from "../../services/User/Consult.service";
 export const RegisterOfConsultPage = () => {
   const { auth } = useContext(AuthContext);
 
-  const submitForm = () => {
-    // ConsultService.Create(data);
-    // console.log("Consulta criada!!");
+  const submitForm = (data) => {
+    ConsultService.Create(data);
+    console.log("Consulta criada!!");
   };
 
   const {

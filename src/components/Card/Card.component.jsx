@@ -31,7 +31,7 @@ function CardComponent(props) {
           <div style={{ display: "flex", gap: "1rem" }}>
             <AiOutlineMedicineBox size={"4rem"} />
             <Card.Title>
-              <h2>{}</h2>
+              <h2>{props.numero}</h2>
             </Card.Title>
           </div>
           {/* <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle> */}
@@ -48,7 +48,7 @@ function CardComponent(props) {
           <div style={{ display: "flex", gap: "1rem" }}>
             <AiOutlineFileSearch size={"4rem"} />
             <Card.Title>
-              <h2>{}</h2>
+              <h2>{props.numero}</h2>
             </Card.Title>
           </div>
           <Card.Text>Exames</Card.Text>

@@ -9,15 +9,22 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { PatientService } from "../../services/User/Patient.service";
+import { ConsultService } from "../../services/User/Consult.service";
 
 export const HomePage = () => {
   const { auth } = useContext(AuthContext);
-  const [users, setUsers] = useState(0);
+  const [patients, setPatients] = useState(0);
+  const [consults, setConsults] = useState(0);
 
   useEffect(() => {
     (async () => {
-      const users = await PatientService.Get();
-      setUsers(users);
+      const patients = await PatientService.Get();
+      setPatients(patients);
+    })();
+
+    (async () => {
+      const consults = await ConsultService.Get();
+      setConsults(consults);
     })();
   }, []);
 
@@ -42,9 +49,9 @@ export const HomePage = () => {
                 padding: "2rem",
               }}
             >
-              <CardComponent numero={users.length} opcao={1} />
-              <CardComponent numero={users.length} opcao={2} />
-              <CardComponent numero={users.length} opcao={3} />
+              <CardComponent numero={patients.length} opcao={1} />
+              <CardComponent numero={consults.length} opcao={2} />
+              <CardComponent numero={patients.length} opcao={3} />
             </div>
 
             <h2>Informações Rápidas de Pacientes</h2>

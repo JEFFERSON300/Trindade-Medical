@@ -54,6 +54,37 @@
       "medication": "",
       "dosage": "t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
       "id": 2
+    },
+    {
+      "reasonOfConsult": "diarreia",
+      "dateOfConsult": "30/07/2023",
+      "timeOfConsult": "09:23",
+      "description": "Eum quibusdam esse qui voluptas obcaecati eos dolorem quos? 33 voluptas dolores",
+      "medication": "",
+      "dosage": "Eum quibusdam esse qui voluptas obcaecati eos dolorem quos? 33 voluptas dolores",
+      "id": 3
+    }
+  ],
+  "exams": [
+    {
+      "nameOfExam": "Lorem ipsum dolor sit am",
+      "dateOfExam": "30/07/2023",
+      "timeOfExam": "12:12",
+      "typeOfExam": "Lorem ipsum dolor sit ame",
+      "laboratory": "Lorem ipsum dolor ",
+      "urlExam": "Lorem ipsum dolor sit amet. In tota",
+      "resultOfExam": "Lorem ipsum dolor sit amet. In totam vo",
+      "id": 1
+    },
+    {
+      "nameOfExam": "Lorem ipsum dolor",
+      "dateOfExam": "12/12/1990",
+      "timeOfExam": "12:14",
+      "typeOfExam": "Lorem ipsum dolor",
+      "laboratory": "Lorem ipsum dolor",
+      "urlExam": "Lorem ipsum dolor",
+      "resultOfExam": "Lorem ipsum dolor",
+      "id": 2
     }
   ]
 }

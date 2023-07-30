@@ -9,13 +9,14 @@ import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
 import { SwitchButtonComponent } from "../../components/SwitchButton/SwitchButton.component";
 import { InputComponent } from "../../components/Form/Input/Input.component";
-import { ConsultService } from "../../services/User/Consult.service";
+import { ExamService } from "../../services/User/Exam.service";
 
-export const RegisterOfConsultPage = () => {
+export const RegisterOfExamPage = () => {
   const { auth } = useContext(AuthContext);
 
   const submitForm = (data) => {
-    ConsultService.Create(data);
+    ExamService.Create(data);
+    alert("Exame cadastrado com sucesso!");
   };
 
   const {
@@ -42,12 +43,12 @@ export const RegisterOfConsultPage = () => {
   };
 
   useEffect(() => {
-    setValue("dateOfConsult", maskDate(watch("dateOfConsult")));
-  }, [watch("dateOfConsult")]);
+    setValue("dateOfExam", maskDate(watch("dateOfExam")));
+  }, [watch("dateOfExam")]);
 
   useEffect(() => {
-    setValue("timeOfConsult", maskTime(watch("timeOfConsult")));
-  }, [watch("timeOfConsult")]);
+    setValue("timeOfExam", maskTime(watch("timeOfExam")));
+  }, [watch("timeOfExam")]);
 
   const render = () => {
     return (
@@ -56,7 +57,7 @@ export const RegisterOfConsultPage = () => {
 
         <div style={{ flex: "1" }}>
           <header>
-            <NavbarComponent name="CADASTRO DE CONSULTA" />
+            <NavbarComponent name="CADASTRO DE EXAME" />
           </header>
 
           <main style={{ padding: "2rem" }}>
@@ -107,19 +108,19 @@ export const RegisterOfConsultPage = () => {
                 }}
               >
                 <legend style={{ padding: "0px 25px" }}>
-                  Consulta de [Nome Paciente]
+                  Exame de [Nome Paciente]
                 </legend>
 
                 <SwitchButtonComponent />
                 <Button variant="outline-primary">Deletar</Button>
-
                 <Button
                   disabled={
-                    errors.reasonOfConsult ||
-                    errors.dateOfConsult ||
-                    errors.timeOfConsult ||
-                    errors.description ||
-                    errors.dosage
+                    errors.nameOfExam ||
+                    errors.dateOfExam ||
+                    errors.timeOfExam ||
+                    errors.typeOfExam ||
+                    errors.laboratory ||
+                    errors.resultOfExam
                   }
                   type="submit"
                 >
@@ -137,25 +138,25 @@ export const RegisterOfConsultPage = () => {
               >
                 <InputComponent
                   sizeInput="1002px"
-                  id="reasonOfConsult"
+                  id="nameOfExam"
                   type="text"
-                  label="Motivo da consulta"
+                  label="Nome do Exame"
                   register={{
-                    ...register("reasonOfConsult", {
+                    ...register("nameOfExam", {
                       required: true,
-                      minLength: 6,
-                      maxLength: 60,
+                      minLength: 5,
+                      maxLength: 50,
                     }),
                   }}
                 />
 
                 <InputComponent
                   sizeInput="150px"
-                  id="dateOfConsult"
+                  id="dateOfExam"
                   type="text"
-                  label="Data da consulta"
+                  label="Data do Exame"
                   register={{
-                    ...register("dateOfConsult", {
+                    ...register("dateOfExam", {
                       required: true,
                     }),
                   }}
@@ -163,53 +164,64 @@ export const RegisterOfConsultPage = () => {
 
                 <InputComponent
                   sizeInput="150px"
-                  id="timeOfConsult"
+                  id="timeOfExam"
                   type="text"
-                  label="Horário da consulta"
+                  label="Horário do Exame"
                   register={{
-                    ...register("timeOfConsult", {
+                    ...register("timeOfExam", {
                       required: true,
                     }),
+                  }}
+                />
+                <InputComponent
+                  sizeInput="660px"
+                  id="typeOfExam"
+                  type="text"
+                  label="Tipo do Exame"
+                  register={{
+                    ...register("typeOfExam", {
+                      required: true,
+                      minLength: 5,
+                      maxLength: 30,
+                    }),
+                  }}
+                />
+
+                <InputComponent
+                  sizeInput="660px"
+                  id="laboratory"
+                  type="text"
+                  label="Laboratório"
+                  register={{
+                    ...register("laboratory", {
+                      required: true,
+                      minLength: 5,
+                      maxLength: 30,
+                    }),
+                  }}
+                />
+
+                <InputComponent
+                  sizeInput="1340px"
+                  id="urlExam"
+                  type="text"
+                  label="URL do Documento do Exame"
+                  register={{
+                    ...register("urlExam"),
                   }}
                 />
 
                 <InputComponent
                   widthT="1340px"
                   heightT="200px"
-                  id="description"
+                  id="resultOfExam"
                   type="textarea"
-                  label="Descrição do Problema"
+                  label="Resultado do Exame"
                   register={{
-                    ...register("description", {
+                    ...register("resultOfExam", {
                       required: true,
                       minLength: 15,
                       maxLength: 1000,
-                    }),
-                  }}
-                />
-
-                <InputComponent
-                  widthT="1340px"
-                  heightT="100px"
-                  id="medication"
-                  type="textarea"
-                  label="Medicação Receitada"
-                  register={{
-                    ...register("medication"),
-                  }}
-                />
-
-                <InputComponent
-                  widthT="1340px"
-                  heightT="100px"
-                  id="dosage"
-                  type="textarea"
-                  label="Dosagem e Precausões"
-                  register={{
-                    ...register("dosage", {
-                      required: true,
-                      minLength: 15,
-                      maxLength: 250,
                     }),
                   }}
                 />

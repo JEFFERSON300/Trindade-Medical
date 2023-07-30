@@ -78,7 +78,10 @@ function SideBarComponent() {
               {" "}
               Exames{" "}
             </MenuItem>
-            <MenuItem component={<Link to="" />} icon={<AiOutlinePlusSquare />}>
+            <MenuItem
+              component={<Link to="/consults" />}
+              icon={<AiOutlinePlusSquare />}
+            >
               Cadastrar Consulta
             </MenuItem>
             <MenuItem component={<Link to="" />} icon={<AiOutlinePlusSquare />}>

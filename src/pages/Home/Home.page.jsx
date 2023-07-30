@@ -1,9 +1,10 @@
 import SideBarComponent from "../../components/SideBar/SideBar";
 import NavbarComponent from "../../components/Toolbar/Navbar/Navbar.component";
 import { Navigate } from "react-router";
+import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/auth.context";
 import CardComponent from "../../components/Card/Card.component";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -27,7 +28,7 @@ export const HomePage = () => {
 
         <div style={{ flex: "1" }}>
           <header>
-            <NavbarComponent name="ESTATÍSTICAS E INFORMAÇÕES" />
+            <NavbarComponent style={{}} name="Home" />
           </header>
 
           <main style={{ padding: "2rem" }}>

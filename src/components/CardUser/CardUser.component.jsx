@@ -2,11 +2,17 @@ import Card from "react-bootstrap/Card";
 import PropTypes from "prop-types";
 import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 function CardUserComponent({ name, telephone, convention }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/patients");
+  };
+
   return (
-    <Card style={{ width: "16.1rem" }}>
+    <Card onClick={handleClick} style={{ width: "16.1rem" }}>
       <Card.Body
         style={{
           display: "flex",

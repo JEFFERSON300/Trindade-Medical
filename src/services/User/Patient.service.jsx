@@ -24,6 +24,26 @@ const ShowByEmail = async (email) => {
   return data[0];
 };
 
+const ShowByTelephone = async (telephone) => {
+  let filter = "?";
+  if (telephone) {
+    filter += `telephone=${telephone}&`;
+  }
+  const response = await fetch(`${BASE_URL}${filter}`);
+  const data = await response.json();
+  return data[0];
+};
+
+const ShowByName = async (name) => {
+  let filter = "?";
+  if (name) {
+    filter += `name=${name}&`;
+  }
+  const response = await fetch(`${BASE_URL}${filter}`);
+  const data = await response.json();
+  return data[0];
+};
+
 const Create = async (data) => {
   const response = await fetch(BASE_URL, {
     method: "POST",
@@ -43,13 +63,6 @@ const Delete = async (id) => {
   });
 };
 
-// newUser --> precisa vir assim
-
-// const data = {
-//   email: email,
-//   password: password,
-// };
-
 const Update = async (id, newUser) => {
   const response = await fetch(`${BASE_URL}/${id}`, {
     method: "PUT",
@@ -67,6 +80,8 @@ export const PatientService = {
   Create,
   Show,
   ShowByEmail,
+  ShowByTelephone,
+  ShowByName,
   Delete,
   Update,
 };

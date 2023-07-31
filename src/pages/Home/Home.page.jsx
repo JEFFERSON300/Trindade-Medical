@@ -4,7 +4,7 @@ import { Navigate } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/auth.context";
 import CardComponent from "../../components/Card/Card.component";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -18,6 +18,27 @@ export const HomePage = () => {
   const [patients, setPatients] = useState(0);
   const [consults, setConsults] = useState(0);
   const [exams, setExams] = useState(0);
+
+  const inputSearch = useRef();
+
+  const handleSearch = async () => {
+    const input = inputSearch.current?.value || "";
+    const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
+    const regexTelephone = /^\(\d{2}\) \d{5}-\d{4}$/;
+
+    if (regexEmail.test(input)) {
+      const res = await PatientService.ShowByEmail(input);
+      res === undefined ? alert(`Usuário não existe`) : console.log(res);
+    }
+    if (regexTelephone.test(input)) {
+      const res = await PatientService.ShowByTelephone(input);
+      res === undefined ? alert(`Usuário não existe`) : console.log(res);
+    }
+    if (typeof input === "string") {
+      const res = await PatientService.ShowByName(input);
+      res === undefined ? alert(`Usuário não existe`) : console.log(res);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -36,23 +57,21 @@ export const HomePage = () => {
     })();
   }, []);
 
+  const menuItem = (item) => {
+    return (
+      <CardUserComponent
+        name={item.name}
+        telephone={item.telephone}
+        convention={item.convention}
+      />
+    );
+  };
+
+  const menuEmpty = () => {
+    return <p>Não há usuários cadastrados no sistema</p>;
+  };
+
   const render = () => {
-    const verifyInput = () => {};
-
-    const menuItem = (item) => {
-      return (
-        <CardUserComponent
-          name={item.name}
-          telephone={item.telephone}
-          convention={item.convention}
-        />
-      );
-    };
-
-    const menuEmpty = () => {
-      return <p>Não há usuários cadastrados no sistema</p>;
-    };
-
     return (
       <div style={{ display: "flex" }}>
         <SideBarComponent style={{}} />
@@ -88,16 +107,17 @@ export const HomePage = () => {
               }}
             >
               <Form.Control
+                ref={inputSearch}
                 style={{ borderRadius: "5px" }}
                 placeholder="Digite o nome, telefone ou e-mail do paciente"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
               />
               <Button
+                onClick={handleSearch}
                 style={{ marginLeft: "1rem", borderRadius: "5px" }}
                 variant="outline-primary"
                 id="button-addon2"
-                onClick={verifyInput}
               >
                 Buscar
               </Button>

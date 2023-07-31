@@ -2,7 +2,7 @@ import SideBarComponent from "../../components/SideBar/SideBar";
 import NavbarComponent from "../../components/Toolbar/Navbar/Navbar.component";
 import { Navigate } from "react-router";
 import { AuthContext } from "../../contexts/auth/auth.context";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useRef } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -13,6 +13,12 @@ import { ConsultService } from "../../services/User/Consult.service";
 
 export const RegisterOfConsultPage = () => {
   const { auth } = useContext(AuthContext);
+  const inputSearch = useRef();
+
+  const handleSearch = () => {
+    const input = inputSearch.current?.value || "";
+    console.log(input);
+  };
 
   const submitForm = (data) => {
     ConsultService.Create(data);
@@ -69,12 +75,14 @@ export const RegisterOfConsultPage = () => {
               }}
             >
               <Form.Control
+                ref={inputSearch}
                 style={{ borderRadius: "5px" }}
                 placeholder="Digite o nome do paciente"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
               />
               <Button
+                onClick={handleSearch}
                 style={{ marginLeft: "1rem", borderRadius: "5px" }}
                 variant="outline-secondary"
                 id="button-addon2"

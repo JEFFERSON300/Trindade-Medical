@@ -1,6 +1,8 @@
 import Card from "react-bootstrap/Card";
 import PropTypes from "prop-types";
 import { AiOutlineUser } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { Navigate } from "react-router";
 
 function CardUserComponent({ name, telephone, convention }) {
   return (
@@ -16,7 +18,7 @@ function CardUserComponent({ name, telephone, convention }) {
         <Card.Title>{name}</Card.Title>
         <Card.Title>{telephone}</Card.Title>
         <Card.Title>{convention}</Card.Title>
-        <Card.Link href="#">Ver mais</Card.Link>
+        <Link to={"/patients"}>Ver mais</Link>
       </Card.Body>
     </Card>
   );

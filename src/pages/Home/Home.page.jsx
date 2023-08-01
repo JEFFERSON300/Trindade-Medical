@@ -18,25 +18,45 @@ export const HomePage = () => {
   const [patients, setPatients] = useState(0);
   const [consults, setConsults] = useState(0);
   const [exams, setExams] = useState(0);
+  const [isInput, setIsInput] = useState(false);
+  const [user, setUser] = useState("");
 
   const inputSearch = useRef();
 
   const handleSearch = async () => {
-    const input = inputSearch.current?.value || "";
+    const input = inputSearch.current?.value;
     const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
     const regexTelephone = /^\(\d{2}\) \d{5}-\d{4}$/;
 
     if (regexEmail.test(input)) {
       const res = await PatientService.ShowByEmail(input);
-      res === undefined ? alert(`Usuário não existe`) : console.log(res);
+      if (res === undefined) {
+        setIsInput(false);
+        alert(`Usuário não existe`);
+      } else {
+        setIsInput(true);
+        setUser(res);
+      }
     }
     if (regexTelephone.test(input)) {
       const res = await PatientService.ShowByTelephone(input);
-      res === undefined ? alert(`Usuário não existe`) : console.log(res);
+      if (res === undefined) {
+        setIsInput(false);
+        alert(`Usuário não existe`);
+      } else {
+        setIsInput(true);
+        setUser(res);
+      }
     }
     if (typeof input === "string") {
       const res = await PatientService.ShowByName(input);
-      res === undefined ? alert(`Usuário não existe`) : console.log(res);
+      if (res === undefined) {
+        setIsInput(false);
+        alert(`Usuário não existe`);
+      } else {
+        setIsInput(true);
+        setUser(res);
+      }
     }
   };
 
@@ -63,6 +83,7 @@ export const HomePage = () => {
         name={item.name}
         telephone={item.telephone}
         convention={item.convention}
+        id={item.id}
       />
     );
   };
@@ -133,7 +154,11 @@ export const HomePage = () => {
               maxWidth: "90%",
             }}
           >
-            {patients.length > 0 ? patients.map(menuItem) : menuEmpty()}
+            {!isInput
+              ? patients.length > 0
+                ? patients.map(menuItem)
+                : menuEmpty()
+              : menuItem(user)}
           </body>
         </div>
       </div>

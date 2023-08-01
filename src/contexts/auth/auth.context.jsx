@@ -24,6 +24,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-AuthProvider.prototypes = {
+AuthProvider.propTypes = {
   children: PropTypes.node,
 };

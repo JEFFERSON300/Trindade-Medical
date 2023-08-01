@@ -72,7 +72,8 @@ const Update = async (id, newUser) => {
     body: JSON.stringify(newUser),
   });
   const res = await response.json();
-  console.log(res && `Usuario ${newUser.email} criado com sucesso!`);
+  alert(res && `Paciente editado com sucesso!`);
+  return res;
 };
 
 export const PatientService = {

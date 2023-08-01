@@ -4,11 +4,11 @@ import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function CardUserComponent({ name, telephone, convention }) {
+function CardUserComponent({ name, telephone, convention, id }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/patients");
+    navigate(`/patients/${id}`);
   };
 
   return (
@@ -24,7 +24,7 @@ function CardUserComponent({ name, telephone, convention }) {
         <Card.Title>{name}</Card.Title>
         <Card.Title>{telephone}</Card.Title>
         <Card.Title>{convention}</Card.Title>
-        <Link to={"/patients"}>Ver mais</Link>
+        <Link to={`/patients/${id}`}>Ver mais</Link>
       </Card.Body>
     </Card>
   );
@@ -34,6 +34,7 @@ CardUserComponent.propTypes = {
   name: PropTypes.string,
   telephone: PropTypes.string,
   convention: PropTypes.string,
+  id: PropTypes.number,
 };
 
 export default CardUserComponent;

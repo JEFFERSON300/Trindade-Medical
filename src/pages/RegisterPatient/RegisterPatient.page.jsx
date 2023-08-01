@@ -5,14 +5,20 @@ import SidebarComponent from "../../components/SideBar/SideBar";
 import NavbarComponent from "../../components/Toolbar/Navbar/Navbar.component";
 import { useForm } from "react-hook-form";
 import { InputComponent } from "../../components/Form/Input/Input.component";
-import { SwitchButtonComponent } from "../../components/SwitchButton/SwitchButton.component";
+import { SwitchButtonFormComponent } from "../../components/SwitchButton/SwitchButtonForm.component";
 import Button from "react-bootstrap/Button";
 import { ServiceAPI } from "../../services/User/API.service";
 import { useEffect } from "react";
 import { PatientService } from "../../services/User/Patient.service";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterPatientPage = () => {
+  const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
+  const { id } = useParams();
+  const [idUser, setIdUser] = useState(0);
 
   const maskPhone = (value) => {
     return value
@@ -54,8 +60,16 @@ export const RegisterPatientPage = () => {
   };
 
   const submitForm = (data) => {
-    PatientService.Create(data);
-    console.log("cadastrado");
+    if (id !== undefined) {
+      const res = PatientService.Update(id,data);
+      res && reset();
+      navigate("/")
+    }
+    else {
+      const res = PatientService.Create(data);
+      res && reset();
+    }
+    
   };
 
   const {
@@ -64,6 +78,7 @@ export const RegisterPatientPage = () => {
     watch,
     setValue,
     getValues,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -89,6 +104,45 @@ export const RegisterPatientPage = () => {
   useEffect(() => {
     setValue("emergencyContaty", maskPhone(watch("emergencyContaty")));
   }, [watch("emergencyContaty")]);
+
+  useEffect(() => {
+    if (id !== undefined) {
+      setIdUser(id);
+      handleEdit()
+    }
+  }, []);
+
+  const handleEdit = async () => {
+    const res = await PatientService.Show(id)
+    setValue("name", res.name);
+    setValue("gender", res.gender);
+    setValue("date", res.date);
+    setValue("cpf", res.cpf);
+    setValue("rg", res.rg);
+    setValue("civilStatus", res.civilStatus);
+    setValue("telephone", res.telephone);
+    setValue("email", res.email);
+    setValue("nationality", res.nationality);
+    setValue("emergencyContaty", res.emergencyContaty);
+    setValue("allergies", res.allergies);
+    setValue("care", res.care);
+    setValue("convention", res.convention);
+    setValue("numberOfCard", res.numberOfCard);
+    setValue("validity", res.validity);
+    setValue("CEP", res.CEP);
+    setValue("city", res.city);
+    setValue("state", res.state);
+    setValue("publicPlace", res.publicPlace);
+    setValue("number", res.number);
+    setValue("complement", res.complement);
+    setValue("neighborhood", res.neighborhood);
+    setValue("referencePoint", res.referencePoint);
+  };
+
+  const handleDelete = async () => {
+    await PatientService.Delete(id)
+    navigate("/")
+  }
 
   const render = () => {
     return (
@@ -128,17 +182,10 @@ export const RegisterPatientPage = () => {
               >
                 <legend style={{ padding: "0px 25px" }}>Identificação</legend>
 
-                <SwitchButtonComponent />
+                <SwitchButtonFormComponent active={id !== undefined ? true : false} check={id !== undefined ? true : false}/>
                 <Button
-                  disabled={
-                    errors.name ||
-                    errors.gender ||
-                    errors.date ||
-                    errors.cpf ||
-                    errors.rg ||
-                    errors.civilStatus ||
-                    errors.telephone
-                  }
+                  onClick={handleDelete}
+                  disabled={id !== undefined ? false : true}
                   variant="outline-primary"
                 >
                   Deletar
@@ -168,6 +215,7 @@ export const RegisterPatientPage = () => {
                   justifyContent: "center",
                 }}
               >
+
                 <InputComponent
                   sizeInput="602px"
                   id="name"

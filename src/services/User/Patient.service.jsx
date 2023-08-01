@@ -24,6 +24,26 @@ const ShowByEmail = async (email) => {
   return data[0];
 };
 
+const ShowByTelephone = async (telephone) => {
+  let filter = "?";
+  if (telephone) {
+    filter += `telephone=${telephone}&`;
+  }
+  const response = await fetch(`${BASE_URL}${filter}`);
+  const data = await response.json();
+  return data[0];
+};
+
+const ShowByName = async (name) => {
+  let filter = "?";
+  if (name) {
+    filter += `name=${name}&`;
+  }
+  const response = await fetch(`${BASE_URL}${filter}`);
+  const data = await response.json();
+  return data[0];
+};
+
 const Create = async (data) => {
   const response = await fetch(BASE_URL, {
     method: "POST",
@@ -33,7 +53,8 @@ const Create = async (data) => {
     body: JSON.stringify(data),
   });
   const res = await response.json();
-  console.log(res && `Usuario ${data.email} criado com sucesso!`);
+  alert(res && `Paciente cadastrado com sucesso!`);
+  return res;
 };
 
 const Delete = async (id) => {
@@ -41,13 +62,6 @@ const Delete = async (id) => {
     method: "DELETE",
   });
 };
-
-// newUser --> precisa vir assim
-
-// const data = {
-//   email: email,
-//   password: password,
-// };
 
 const Update = async (id, newUser) => {
   const response = await fetch(`${BASE_URL}/${id}`, {
@@ -58,7 +72,8 @@ const Update = async (id, newUser) => {
     body: JSON.stringify(newUser),
   });
   const res = await response.json();
-  console.log(res && `Usuario ${newUser.email} criado com sucesso!`);
+  alert(res && `Paciente editado com sucesso!`);
+  return res;
 };
 
 export const PatientService = {
@@ -66,6 +81,8 @@ export const PatientService = {
   Create,
   Show,
   ShowByEmail,
+  ShowByTelephone,
+  ShowByName,
   Delete,
   Update,
 };

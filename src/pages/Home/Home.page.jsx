@@ -20,45 +20,8 @@ export const HomePage = () => {
   const [exams, setExams] = useState(0);
   const [isInput, setIsInput] = useState(false);
   const [user, setUser] = useState("");
-
   const inputSearch = useRef();
-
-  const handleSearch = async () => {
-    const input = inputSearch.current?.value;
-    const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
-    const regexTelephone = /^\(\d{2}\) \d{5}-\d{4}$/;
-
-    if (regexEmail.test(input)) {
-      const res = await PatientService.ShowByEmail(input);
-      if (res === undefined) {
-        setIsInput(false);
-        alert(`Usuário não existe`);
-      } else {
-        setIsInput(true);
-        setUser(res);
-      }
-    }
-    if (regexTelephone.test(input)) {
-      const res = await PatientService.ShowByTelephone(input);
-      if (res === undefined) {
-        setIsInput(false);
-        alert(`Usuário não existe`);
-      } else {
-        setIsInput(true);
-        setUser(res);
-      }
-    }
-    if (typeof input === "string") {
-      const res = await PatientService.ShowByName(input);
-      if (res === undefined) {
-        setIsInput(false);
-        alert(`Usuário não existe`);
-      } else {
-        setIsInput(true);
-        setUser(res);
-      }
-    }
-  };
+  
 
   useEffect(() => {
     (async () => {
@@ -77,15 +40,66 @@ export const HomePage = () => {
     })();
   }, []);
 
+
+  const handleSearch = async () => {
+    const input = inputSearch.current?.value;
+    const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
+    const regexTelephone = /^\(\d{2}\) \d{5}-\d{4}$/;
+    
+    if (regexEmail.test(input)) {
+      const res = await PatientService.ShowByEmail(input);
+      if (res === undefined) {
+        setIsInput(false);
+        alert(`Usuário não existe`);
+      } 
+      else {
+        setIsInput(true);
+        setUser(res);
+        console.log(res);
+      }
+    }
+    if (regexTelephone.test(input)) {
+      const res = await PatientService.ShowByTelephone(input);
+      if (res === undefined) {
+        setIsInput(false);
+        alert(`Usuário não existe`);
+      }
+      else {
+        setIsInput(true);
+        setUser(res);
+        console.log(res);
+      } 
+    }
+    if ((typeof input === "string") && (input !== "")) {
+      const res = await PatientService.ShowByName(input);
+      if (res === undefined) {
+        setIsInput(false);
+        alert(`Usuário não existe`);
+      }
+      else {
+        setIsInput(true);
+        setUser(res);
+        console.log(res);
+      } 
+    }
+    else {
+      setIsInput(false);
+    }
+    
+  };
+
+
   const menuItem = (item) => {
-    return (
-      <CardUserComponent
-        name={item.name}
-        telephone={item.telephone}
-        convention={item.convention}
-        id={item.id}
-      />
-    );
+    
+      return (
+        <CardUserComponent
+          name={item.name}
+          telephone={item.telephone}
+          convention={item.convention}
+          id={item.id}
+        />
+      );
+
   };
 
   const menuEmpty = () => {
@@ -154,11 +168,10 @@ export const HomePage = () => {
               maxWidth: "90%",
             }}
           >
-            {!isInput
-              ? patients.length > 0
+            {!isInput ? (patients.length > 0
                 ? patients.map(menuItem)
-                : menuEmpty()
-              : menuItem(user)}
+                : menuEmpty()) : (menuItem(user)) 
+              }
           </body>
         </div>
       </div>

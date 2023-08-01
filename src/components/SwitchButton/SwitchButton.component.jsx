@@ -8,6 +8,7 @@ export const SwitchButtonComponent = () => {
         checked={true}
         size="sm"
         onstyle="primary"
+        style="border"
         width={50}
         height={25}
       />

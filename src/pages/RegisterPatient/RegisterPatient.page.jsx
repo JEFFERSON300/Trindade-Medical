@@ -5,7 +5,7 @@ import SidebarComponent from "../../components/SideBar/SideBar";
 import NavbarComponent from "../../components/Toolbar/Navbar/Navbar.component";
 import { useForm } from "react-hook-form";
 import { InputComponent } from "../../components/Form/Input/Input.component";
-import { SwitchButtonComponent } from "../../components/SwitchButton/SwitchButton.component";
+import { SwitchButtonFormComponent } from "../../components/SwitchButton/SwitchButtonForm.component";
 import Button from "react-bootstrap/Button";
 import { ServiceAPI } from "../../services/User/API.service";
 import { useEffect } from "react";
@@ -182,10 +182,10 @@ export const RegisterPatientPage = () => {
               >
                 <legend style={{ padding: "0px 25px" }}>Identificação</legend>
 
-                <SwitchButtonComponent />
+                <SwitchButtonFormComponent active={id !== undefined ? true : false} check={id !== undefined ? true : false}/>
                 <Button
                   onClick={handleDelete}
-                  disabled={idUser == 0 ? true : false}
+                  disabled={id !== undefined ? false : true}
                   variant="outline-primary"
                 >
                   Deletar

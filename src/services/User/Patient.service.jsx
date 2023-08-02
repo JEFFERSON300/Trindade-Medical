@@ -44,6 +44,16 @@ const ShowByName = async (name) => {
   return data[0];
 };
 
+const ShowByConvention = async (convention) => {
+  let filter = "?";
+  if (convention) {
+    filter += `convention=${convention}&`;
+  }
+  const response = await fetch(`${BASE_URL}${filter}`);
+  const data = await response.json();
+  return data[0];
+};
+
 const Create = async (data) => {
   const response = await fetch(BASE_URL, {
     method: "POST",
@@ -83,6 +93,7 @@ export const PatientService = {
   ShowByEmail,
   ShowByTelephone,
   ShowByName,
+  ShowByConvention,
   Delete,
   Update,
 };

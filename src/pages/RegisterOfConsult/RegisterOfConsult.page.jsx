@@ -84,7 +84,7 @@ export const RegisterOfConsultPage = () => {
               <Button
                 onClick={handleSearch}
                 style={{ marginLeft: "1rem", borderRadius: "5px" }}
-                variant="outline-secondary"
+                variant="outline-primary"
                 id="button-addon2"
               >
                 Buscar

@@ -66,7 +66,7 @@ function SideBarComponent() {
               Cadastrar{" "}
             </MenuItem>
             <MenuItem
-              component={<Link to="" />}
+              component={<Link to="/medicalrecords" />}
               icon={<AiOutlineUnorderedList />}
             >
               Listar Prontuário

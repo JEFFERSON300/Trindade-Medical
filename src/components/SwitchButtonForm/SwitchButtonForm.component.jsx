@@ -1,4 +1,4 @@
-import * as Styled from "./Switch.style";
+import * as Styled from "../SwitchButton/Switch.style";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import PropTypes from "prop-types";
 

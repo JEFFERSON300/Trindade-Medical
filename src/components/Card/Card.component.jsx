@@ -9,7 +9,15 @@ import PropTypes from "prop-types";
 function CardComponent(props) {
   if (props.opcao === 1) {
     return (
-      <Card style={{ width: "18rem" }}>
+      <Card
+        style={{
+          width: "18rem",
+          border: "1px solid #ccc",
+          boxSizing: "border-box",
+          boxShadow: "2px 2px 4px #000000",
+          borderRadius: "10px",
+        }}
+      >
         <Card.Body>
           <div style={{ display: "flex", gap: "1rem" }}>
             <AiOutlineTeam size={"4rem"} />
@@ -26,7 +34,15 @@ function CardComponent(props) {
 
   if (props.opcao === 2) {
     return (
-      <Card style={{ width: "18rem" }}>
+      <Card
+        style={{
+          width: "18rem",
+          border: "1px solid #ccc",
+          boxSizing: "border-box",
+          boxShadow: "2px 2px 4px #000000",
+          borderRadius: "10px",
+        }}
+      >
         <Card.Body>
           <div style={{ display: "flex", gap: "1rem" }}>
             <AiOutlineMedicineBox size={"4rem"} />
@@ -43,7 +59,15 @@ function CardComponent(props) {
 
   if (props.opcao === 3) {
     return (
-      <Card style={{ width: "18rem" }}>
+      <Card
+        style={{
+          width: "18rem",
+          border: "1px solid #ccc",
+          boxSizing: "border-box",
+          boxShadow: "2px 2px 4px #000000",
+          borderRadius: "10px",
+        }}
+      >
         <Card.Body>
           <div style={{ display: "flex", gap: "1rem" }}>
             <AiOutlineFileSearch size={"4rem"} />

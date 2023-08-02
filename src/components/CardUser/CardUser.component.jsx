@@ -18,6 +18,10 @@ function CardUserComponent({ name, telephone, convention, id }) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          border: "1px solid #ccc",
+          boxSizing: "border-box",
+          boxShadow: "2px 2px 4px #000000",
+          borderRadius: "10px",
         }}
       >
         <AiOutlineUser size={"4rem"} />

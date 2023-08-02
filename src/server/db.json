@@ -1,14 +1,9 @@
 {
   "users": [
     {
-      "email": "iza@gmail.com",
-      "password": "casa2020",
-      "id": 2
-    },
-    {
       "email": "jeffersonpedro300@gmail.com",
       "password": "casa2014",
-      "id": 3
+      "id": 1
     }
   ],
   "patients": [
@@ -77,7 +72,7 @@
       "emergencyContaty": "(81) 55555-5555",
       "allergies": "",
       "care": "",
-      "convention": "Intermedica",
+      "convention": "Unimed",
       "numberOfCard": "",
       "validity": "",
       "CEP": "88040405",

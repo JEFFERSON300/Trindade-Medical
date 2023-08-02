@@ -12,18 +12,53 @@ import { PatientService } from "../../services/User/Patient.service";
 export const ListMedicalRecordPage = () => {
   const { auth } = useContext(AuthContext);
   const inputSearch = useRef();
-  const [exams, setExams] = useState(0);
+  const [patients, setPatients] = useState(0);
+  const [isInput, setIsInput] = useState(false);
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     (async () => {
       const res = await PatientService.Get();
-      setExams(res);
+      setPatients(res);
     })();
   }, []);
 
   const handleSearch = () => {
-    const input = inputSearch.current?.value || "";
-    console.log(input);
+    const input = inputSearch.current?.value;
+
+    if (!isNaN(input) && input !== "") {
+      let filterId = patients.filter((patient) => {
+        return patient.id === Number(input);
+      });
+
+      if (filterId.length > 0) {
+        setIsInput(true);
+        setUser(filterId);
+      }
+    }
+    if (typeof input === "string" && input !== "") {
+      let filterName = patients.filter((patient) => {
+        return patient.name === input;
+      });
+
+      if (filterName.length > 0) {
+        setIsInput(true);
+        setUser(filterName);
+      }
+
+      let filterConvention = patients.filter((convention) => {
+        return convention.convention === input;
+      });
+
+      if (filterConvention.length > 0) {
+        setIsInput(true);
+        setUser(filterConvention);
+      }
+    }
+    if (input === "") {
+      setIsInput(false);
+      //   alert(`Usuário não existe`);
+    }
   };
 
   const menuItem = (item) => {
@@ -91,7 +126,11 @@ export const ListMedicalRecordPage = () => {
               <h2>Nome do Paciente</h2>
               <h2>Convênio</h2>
             </div>
-            {exams.length > 0 ? exams.map(menuItem) : menuEmpty()}
+            {!isInput
+              ? patients.length > 0
+                ? patients.map(menuItem)
+                : menuEmpty()
+              : menuItem(user[0])}
           </body>
         </div>
       </div>

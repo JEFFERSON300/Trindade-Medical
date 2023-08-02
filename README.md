@@ -53,7 +53,7 @@ $ npm run dev
 $ http://localhost:5173/login
 ```
 
-<p align="justify">Você verá a tela abaixo, onde há possibilidade de criar novo usuário, mas por padrão já temos um que pode ser utilizado para testar o sistema.</p>
+<p align="justify">Você verá a tela abaixo, onde há possibilidade de criar novo usuário, mas por padrão há um usuário que pode ser utilizado para testar o sistema.</p>
 
 ![Exemplo Insomnia](/public/login-trindade-medical.png)
 
@@ -61,3 +61,16 @@ $ http://localhost:5173/login
 $ E-mail: admin@admin.com
 $ Senha: 12345678
 ```
+<p align="justify">A figura abaixo mostra a tela principal do sistema, o design implementado e as funcionalidades. Mais detalhes verificar o vídeo tutorial.</p>
+
+![Exemplo Insomnia](/public/home-trindade-medical.png)
+
+## Vídeo tutorial de utilização da plataforma
+
+https://drive.google.com/drive/folders/1UGDbRshMbuPv5j4dkNaUIG365LXI-KXd?usp=sharing
+
+## Melhorias
+
+<p align="justify">Algumas funcionalidades ainda estão em desenvolvimento, como a busca nas páginas de cadastro de consulta e exame, assim como outras funcionalidades pontuais. No entanto, estamos comprometidos em aprimorar continuamente o sistema para torná-lo mais robusto e capaz de atender às necessidades específicas de cada hospital e clínica médica.</p>
+
+<p align="justify">Nossa equipe está dedicada a implementar melhorias e atualizações ao longo do tempo, levando em consideração o feedback de nossos usuários e as demandas do mercado. Com esse processo de aperfeiçoamento contínuo, buscamos garantir que a plataforma Trindade Medical se torne uma solução completa e personalizada para cada instituição de saúde.</p>
